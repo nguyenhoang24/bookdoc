@@ -1,0 +1,47 @@
+<div class="container">
+    <form [formGroup]="searchForm" (ngSubmit)="reloadTable()">
+        <div class="row mt-3">
+            <globits-grid [xs]="12" [md]="4" [lg]="4">
+                <select-component class="flex-auto" [label]="'Loại file'"></select-component>
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="4" [lg]="4">
+                <date-input  [control]="f?.fromDate" [controlName]="'fromDate'" [label]="'Từ ngày:'">
+                </date-input>
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="4" [lg]="4">
+                <date-input [control]="f?.toDate" [controlName]="'toDate'" [label]="'Đến ngày:'">
+                </date-input>
+            </globits-grid>
+        </div>
+        <div class="row">
+            <globits-grid [xs]="12" [md]="12" [lg]="12">
+                <div class="flex items-center justify-center">
+                    <button-component type="submit">
+                      <icon-search></icon-search>
+                      Tìm kiếm
+                    </button-component>
+                </div>
+            </globits-grid>
+        </div>
+        <div class="row mt-4">
+            <globits-grid style="padding: 0;" [xs]="12" [md]="12" [lg]="12">
+               <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+                <table-component [rows]="listOfUploadFiles" [childTemplate]="button" (limitChange)="onLimitChange($event)" [columns]="columns" [totalElements]="totalElements" (change)="setPage($event)">
+                </table-component>
+            </globits-grid>
+        </div>
+
+    </form>
+</div>
+
+<ng-template #button let-row>
+    <!-- <button class="mr-2" type="button" (click)="onSelect()">
+        <icon-circle-check></icon-circle-check>
+    </button> -->
+    <button class="mr-2" type="button" (click)="onDownload(row?.id)">
+        <icon-download-file></icon-download-file>
+    </button>
+    <button type="button" (click)="onDelete(row?.id)">
+        <icon-trash></icon-trash>
+    </button>
+</ng-template>

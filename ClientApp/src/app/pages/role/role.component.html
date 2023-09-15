@@ -1,0 +1,60 @@
+<globits-breadcrumbs [current]="'Quyền hạn'" [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+
+<div class="py-3 px-2 fullwidth border-b-2 card m-3">
+  <div>
+    <mat-tab-group #tabGroup class="custom-tab-group">
+      <mat-tab label="Quyền hạn" mat-align-tabs="center">
+        <ng-template matTabLabel>Quyền hạn</ng-template>
+        <ng-template matTabContent>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quyền</th>
+                  <th>Dịch vụ</th>
+                  <th>Hành động</th>
+                  <th style="width: 170px;">
+                    <button class="btn bg-primary-white" type="button" matTooltip="Tạo quyền"
+                      routerLink="/setting/role/new">
+                      <mat-icon svgIcon="mat:add"></mat-icon> Tạo quyền
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let row of rows; let i=index">
+                  <tr>
+                    <td>{{row?.name}} </td>
+                    <td>{{row?.authority}}</td>
+                    <td>{{row?.description}}</td>
+                    <td>
+                      <div class="btn btn-group-xs" style="display: inline-flex;">
+                        <button class="btn text-white bg-primary-black flex items-center" type="button" matTooltip="Sửa"
+                          routerLink="/setting/role/update">
+                          <mat-icon svgIcon="mat:edit"></mat-icon> Sửa
+                        </button>
+                        <button class="btn text-white bg-primary-pink flex items-center" type="button" matTooltip="Xóa">
+                          <mat-icon svgIcon="mat:delete"></mat-icon> Xóa
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="" [disabled]="true">
+        <ng-template matTabLabel>
+          <a class="iconText mr-4" routerLink="/setting/role/service"><mat-icon style="position: relative; top:5px"
+              svgIcon="mat:send"></mat-icon> Định nghĩa dịch vụ</a>
+          <a class="iconText" routerLink="/setting/role/define"><mat-icon style="position: relative; top:5px"
+              svgIcon="mat:settings"></mat-icon> Định nghĩa hành động</a>
+        </ng-template>
+        <ng-template matTabContent>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

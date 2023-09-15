@@ -1,0 +1,31 @@
+<div class="tool-item">Trình bày: <strong>{{firstOffset}} - {{lastOffset}}</strong> trong số
+    <strong>{{count}}</strong> mục.
+</div>
+<div class="tool-item">
+    <label for="per-page">
+        Mục mỗi trang: 10
+    </label>
+    <!-- <select id="per-page" (change)="onLimitChange($event)" *ngIf="!isMax1000">
+        <option *ngFor="let option of pageSizeOptions" [value]="option" [selected]="option == size">
+            {{ option }}
+        </option>
+    </select>
+    <select id="per-page" (change)="onLimitChange($event)" *ngIf="isMax1000">
+      <option *ngFor="let option of pageSizeOptions1000" [value]="option" [selected]="option == size">
+        {{ option }}
+      </option>
+    </select> -->
+</div>
+<ul class="pager">
+    <li><a (click)="canPrevious()" class="clickIcon" [ngClass]="{ 'disabled': page===1 }"><mat-icon>skip_previous</mat-icon></a></li>
+    <li><a (click)="prevPage()" class="clickIcon" [ngClass]="{ 'disabled': page===1 }"><mat-icon>navigate_before</mat-icon></a></li>
+    <li *ngIf="showFirst()"><a href="javascript:void(0)" (click)="selectPage(1)">1</a></li>
+    <li *ngIf="showFirst()"><a href="javascript:void(0)">...</a></li>
+    <li class="pages" *ngFor="let pg of pages" [class.active]="pg.number === page">
+        <a href="javascript:void(0)" (click)="selectPage(pg.number)">{{pg.text}}</a>
+    </li>
+    <li *ngIf="showLast()"><a href="javascript:void(0)">...</a></li>
+    <li *ngIf="showLast()"><a href="javascript:void(0)" (click)="selectPage(totalPages)">{{totalPages}}</a></li>
+    <li><a (click)="nextPage()" class="clickIcon" [ngClass]="{ 'disabled': page===totalPages }"><mat-icon>navigate_next</mat-icon></a></li>
+    <li><a (click)="canNext()" class="clickIcon" [ngClass]="{ 'disabled': page===totalPages }"><mat-icon>skip_next</mat-icon></a></li>
+</ul>

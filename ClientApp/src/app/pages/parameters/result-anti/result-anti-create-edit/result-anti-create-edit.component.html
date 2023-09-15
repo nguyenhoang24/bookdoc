@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="flex items-center" mat-dialog-title>
+        <h2 class="headline m-0 flex-auto">{{isCreateMode ? 'Thêm mới' : 'Chỉnh sửa'}}</h2>
+        <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+            <mat-icon svgIcon="mat:close"></mat-icon>
+        </button>
+    </div>
+    <mat-divider class="-mx-6 text-border"></mat-divider>
+    <mat-dialog-content class="flex flex-col">
+        <div class="flex mt-4">
+            <globits-input [control]="f.code" [controlName]="'code'" requiredText="Mã không được để trống"
+                label="Mã"></globits-input>
+            <globits-input class="ml-2" [control]="f.value" controlName="value" requiredText="Kết quả Xn kháng nguyên kháng thể không được để trống"
+                label="Kết quả Xn kháng nguyên kháng thể"></globits-input>
+        </div>
+        <globits-input [control]="f.description" controlName="description" requiredText="Mô tả" [textArea]="true"
+        label="Mô tả"></globits-input>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close type="button">Đóng</button>
+        <button color="primary" mat-flat-button type="submit">Xác nhận</button>
+    </mat-dialog-actions>
+</form>

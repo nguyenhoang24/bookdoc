@@ -1,0 +1,27 @@
+@import "../input-component/input-component.component.scss";
+
+.text-danger {
+    color: red !important;
+}
+
+.date-component {
+    @extend .input-component;
+
+    .mat-form-field-suffix {
+        bottom: 10px;
+        right: -10px;
+    }
+
+    .input-container {
+        position: relative;
+        padding-right: 35px;
+
+        ::ng-deep .mat-datepicker-toggle {
+            button {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+    }
+}

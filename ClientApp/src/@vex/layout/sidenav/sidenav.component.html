@@ -1,0 +1,53 @@
+<!-- <div (mouseenter)="collapseOpenSidenav()" (mouseleave)="collapseCloseSidenav()" [class.collapsed]="collapsed"
+  [class.open]="collapsed && collapsedOpen$ | async" class="sidenav flex flex-col">
+  <div class="vex-sidenav-toolbar__container">
+    <div class="sidenav-toolbar flex-none flex items-center">
+      <img [src]="imageUrl$ | async" alt="Logo" class="w-6 select-none flex-none" style="zoom: 1.5" />
+      <h2 class="vex-sidenav-toolbar__headline flex-auto"><button (click)="clickHome()">{{ title }}</button></h2>
+      <button (click)="toggleCollapse()" *ngIf="showCollapsePin$ | async"
+        class="w-8 h-8 -mr-2 leading-none flex-none hidden lg:block" mat-icon-button type="button">
+        <mat-icon *ngIf="!collapsed" class="text-[0.875rem] w-[0.875rem] h-[0.875rem]"
+          svgIcon="mat:radio_button_checked"></mat-icon>
+        <mat-icon *ngIf="collapsed" class="text-[0.875rem] w-[0.875rem] h-[0.875rem]"
+          svgIcon="mat:radio_button_unchecked"></mat-icon>
+      </button>
+    </div>
+
+    <div class="vex-sidenav-toolbar__divider"></div>
+  </div>
+
+  <vex-scrollbar class="flex-1 flex flex-col" *ngIf="isLoadComponent">
+    <div class="pt-2 flex-1">
+      <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute" [item]="item" [level]="0"></vex-sidenav-item>
+    </div>
+  </vex-scrollbar>
+
+  <div *ngIf="userVisible$ | async" class="vex-sidenav-user__container flex-none">
+    <div #userProfileMenuOriginRef (click)="openProfileMenu(userProfileMenuOriginRef)"
+      [class.vex-sidenav-user--open]="userMenuOpen$ | async" class="vex-sidenav-user flex items-center" matRipple
+      matRippleColor="var(--sidenav-item-ripple-color)">
+      <img alt="User Avatar" class="vex-sidenav-user__image flex-none" src="assets/img/avatars/1.jpg" />
+      <div class="vex-sidenav-user__content flex-auto">
+        <div class="vex-sidenav-user__title">{{username}}</div>
+        <div class="vex-sidenav-user__subtitle">
+          <ng-container *ngFor="let role of roles">
+            <span *ngIf="role == 'ROLE_ADMIN'">Admin</span>
+          </ng-container>
+        </div>
+      </div>
+      <mat-icon class="vex-sidenav-user__dropdown-icon flex-none" svgIcon="mat:arrow_drop_down"></mat-icon>
+    </div>
+  </div>
+</div> -->
+
+<div (mouseenter)="collapseOpenSidenav()" (mouseleave)="collapseCloseSidenav()" [class.collapsed]="collapsed" [class.open]="collapsed && collapsedOpen$ | async" class="sidenav flex flex-col">
+  <div class="sidenav-toolbar">
+      <img [src]="imageUrl$ | async" alt="Logo" class="w-6 select-none flex-none side-nav-logo" style="zoom: 1.5" />
+      <h5 class="vex-sidenav-toolbar__headline"><button (click)="clickHome()">{{ title }}</button></h5>
+  </div>
+
+  <vex-scrollbar class="flex-1 flex flex-col list-sidenav-item">
+    <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute" [item]="item" [level]="0"
+      [collapsed]="collapsed"></vex-sidenav-item>
+  </vex-scrollbar>
+</div>

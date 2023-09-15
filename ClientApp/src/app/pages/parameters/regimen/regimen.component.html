@@ -1,0 +1,112 @@
+<div class="bg-white mb-5 rounded shadow-lg">
+  <form [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+    <globits-grid [container]="true">
+      <globits-grid [md]="6" [lg]="3">
+        <globits-input
+          class="flex-auto"
+          [label]="'Mã phác đồ'"
+          [control]="f.code"
+          [controlName]="'code'"
+        ></globits-input>
+      </globits-grid>
+
+      <globits-grid [md]="6" [lg]="3">
+        <globits-input
+          class="flex-auto"
+          [label]="'Tên phác đồ'"
+          [control]="f.name"
+          [controlName]="'name'"
+        ></globits-input>
+      </globits-grid>
+
+      <globits-grid [md]="6" [lg]="3">
+        <globits-select
+          class="flex-auto"
+          [label]="'Loại phác đồ'"
+          [control]="f.line"
+          [controlName]="'line'"
+          [options]="listRegimenType"
+        ></globits-select>
+      </globits-grid>
+    </globits-grid>
+
+    <globits-grid className="flex justify-center">
+      <button class="bg-cyan-700 text-white" mat-raised-button type="submit">
+        <mat-icon class="icon-sm text-secondary" svgIcon="mat:search"></mat-icon
+        >Tìm kiếm
+      </button>
+    </globits-grid>
+  </form>
+</div>
+
+<div class="bg-white rounded shadow-lg">
+  <div class="flex justify-between border-b-2 p-2 items-center">
+    <h2 class="title flex items-center">
+      <mat-icon svgIcon="mat:info"></mat-icon>
+      Phác đồ điều trị
+    </h2>
+    <div class="flex">
+      <button
+        [matMenuTriggerFor]="columnFilterMenu"
+        class="ml-4 flex-none"
+        mat-icon-button
+        matTooltip="Filter Columns"
+        type="button"
+      >
+        <mat-icon svgIcon="mat:filter_list"></mat-icon>
+      </button>
+      <button
+        (click)="handleOpenPopupFormRegimen()"
+        class="ml-4 flex-none bg-cyan-700"
+        mat-mini-fab
+        matTooltip="Thêm mới"
+        type="button"
+      >
+        <mat-icon svgIcon="mat:add"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="p-2">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <table-component
+      [columns]="visibleColumns"
+      [rows]="rows"
+      [totalElements]="totalElements"
+      (change)="setPage($event)"
+      [pageIndex]="searchObject.pageIndex"
+      [pageSize]="searchObject.pageSize"
+    >
+    </table-component>
+  </div>
+</div>
+
+<mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
+  <ng-container *ngFor="let column of columns">
+    <button
+      (click)="toggleColumnVisibility(column, $event)"
+      *ngIf="column.prop != 'actions'"
+      class="checkbox-item mat-menu-item"
+    >
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        [(ngModel)]="column.visible"
+        color="primary"
+      >
+        {{ column.name }}
+      </mat-checkbox>
+    </button>
+  </ng-container>
+</mat-menu>
+
+<ng-template #manipulate let-row>
+  <button
+    (click)="handleOpenPopupFormRegimen(row?.id)"
+    mat-icon-button
+    type="button"
+  >
+    <mat-icon svgIcon="mat:edit"></mat-icon>
+  </button>
+  <button (click)="handleDelete(row.id)" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:delete"></mat-icon>
+  </button>
+</ng-template>

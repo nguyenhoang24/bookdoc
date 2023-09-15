@@ -1,0 +1,34 @@
+.btn-component {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    gap: 5px;
+    padding: 5px 10px;
+}
+
+.primary {
+    color: #FFFFFF;
+    background-color: #006778;
+
+    svg {
+        path {
+            fill: #FFFFFF;
+        }
+    }
+
+    &:hover {
+        background-color: #338593;
+    }
+}
+
+.green-outline {
+    background-color: #FFFFFF;
+    color: #006778;
+    border: 1px solid #006778;
+    transition: all .2s;
+
+    &:hover {
+        color: #FFFFFF;
+        background-color: #006778;
+    }
+}

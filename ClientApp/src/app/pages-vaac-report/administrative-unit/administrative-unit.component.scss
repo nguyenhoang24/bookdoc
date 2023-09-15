@@ -1,0 +1,17 @@
+#importExel {
+    display: none;
+  }
+
+  .btn{
+    border-radius: 6px;
+  }
+
+  ::ng-deep{
+    .icon-edit{
+      color: #FFC804
+    }
+
+    .icon-delete{
+      color: #F23F44
+    }
+  }

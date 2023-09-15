@@ -1,0 +1,59 @@
+<vex-secondary-toolbar>
+    <globits-breadcrumbs [crumbs]="breadcrumbs"></globits-breadcrumbs>
+
+    <button class="ml-2" color="primary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button>
+</vex-secondary-toolbar>
+<mat-card class="m-5 p-0">
+    <mat-card-title class="col-12 title px-3 py-3 rounded-t bg-primary-black text-white">
+        <span>{{id ? 'Cập nhật tài khoản' : 'Thêm mới tài khoản'}}</span>
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup] = "form" (ngSubmit)="onSubmit()">
+            <div class="pb-4 p-gutter fullwidth border-b-2">
+                <globits-grid [container]="true" [className]="'card-form-body'">
+                    <globits-grid [xs]="12" [md]="6" [lg]="6">
+                        <input-component class="flex-auto" [label]="'Họ và tên'" [control]="f.displayName" [controlName]="'displayName'"
+                        [required]="true" [requiredText] = "'Họ và tên không được để trống'" [needCapitalize]="true" ></input-component>
+                    </globits-grid>
+                    <globits-grid [xs]="12" [md]="6" [lg]="6">
+                        <input-component class="flex-auto" [requiredText] = "'Email không được để trống'" [label]="'Email'" [control]="f.email" [controlName]="'email'"
+                        [required]="true"></input-component>
+                        <mat-error *ngIf="form.get('email').errors?.['email']">{{getErrorMessage('email')}}</mat-error>
+                    </globits-grid>
+                </globits-grid>
+                <globits-grid [container]="true" [className]="'card-form-body'">
+                    <globits-grid [xs]="12" [md]="4" [lg]="4">
+                        <input-component class="flex-auto"  [requiredText] = "'Tài khoản không được để trống'"  [label]="'Tài khoản'" [control]="f.username" [controlName]="'username'"
+                        [required]="true"></input-component>
+                    </globits-grid>
+                    <globits-grid [xs]="12" [md]="4" [lg]="4">
+                        <input-component class="flex-auto" [requiredText] = "'Mật khẩu không được để trống'" [label]="'Mật khẩu'" [type]="'password'" [control]="f.password" [controlName]="'password'"
+                        [required]="true"></input-component>
+                    </globits-grid>
+                    <globits-grid [xs]="12" [md]="4" [lg]="4">
+                        <input-component class="flex-auto" [requiredText] = "'Mật khẩu nhập lại không được để trống'" [label]="'Nhập lại mật khẩu'" [type]="'password'" [control]="f.password" [controlName]="'confirmPassword'"
+                        [required]="true"></input-component>
+                        <mat-error *ngIf="form.get('confirmPassword').errors?.['pwNotMath']">{{getErrorMessage('confirmPassword')}}</mat-error>
+                    </globits-grid>
+                </globits-grid>
+                <globits-grid [container]="true" [className]="'card-form-body'">
+                    <globits-grid [xs]="12" [md]="12" [lg]="12">
+                        <select-component [multiple]="true" [requiredText] = "'Quyền không được để trống'" [options]="listRole" bindLabel="name" class="flex-auto" [label]="'Quyền'" [control]="f.roles" [controlName]="'roles'"
+                        [required]="true"></select-component>
+                    </globits-grid>
+                </globits-grid>
+                <globits-grid [container]="true" [className]="'card-form-body'">
+                    <globits-grid [xs]="12" [md]="12" [lg]="12">
+                        <mat-checkbox formControlName="active">Kích hoạt</mat-checkbox>
+                    </globits-grid>
+                </globits-grid>
+                <div class="flex items-center justify-end">
+                    <button color="primary" class="button mr-3" [ngStyle]="{'backgroundColor': '#006778', 'color': 'white'}" mat-raised-button type="submit"><icon-add class="mr-1"></icon-add>Lưu</button>
+                    <button type="button" class="button" (click)="back()" mat-raised-button>Hủy</button>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

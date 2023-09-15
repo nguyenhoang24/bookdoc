@@ -1,0 +1,91 @@
+<vex-secondary-toolbar>
+    <globits-breadcrumbs [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+    <button class="ml-2" color="primary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button>
+  </vex-secondary-toolbar>
+  <form class="row" [formGroup]="form!" (ngSubmit)="onSubmit()">
+    <div class="col-md-12 col-xl-12 col-lg-12">
+      <div class="mt-4 card ml-2">
+        <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+          Thông tin cơ bản
+        </h2>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-content>
+            <div class="row">
+                <input-component class="flex-auto col-md-4" [label]="'Cục phòng chống HTV/AIDS'"></input-component>
+                <input-component class="flex-auto col-md-4" [label]="'Mã cơ sở'"></input-component>
+                <input-component class="flex-auto col-md-4" [label]="'Tên viết tắt'"></input-component>
+            </div>
+            <div class="row ml-1 mr-1">
+                <input-component class="col-md-12" [textArea]="true" class="flex-auto" [label]="'Mô tả ngắn'"></input-component>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="mt-4 card ml-2">
+        <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+          Địa chỉ
+        </h2>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-content>
+            <div class="row">
+              <input-component class="col-md-12" [label]="'Số nhà/Tên đường/Thôn/Xóm'"></input-component>
+            </div>
+            <div class="row">
+              <select-component class="col-md-4" [label]="'Tỉnh/Thành phố'"></select-component>
+
+              <select-component class="col-md-4" [label]="'Quận/Huyện'"></select-component>
+
+              <select-component class="col-md-4" [label]="'Phường/xã'"></select-component> 
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div class="col-md-12 col-xl-12 col-lg-12">
+      <div class="mt-4 card ml-2 mr-1">
+        <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+          Liên hệ
+        </h2>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-content>
+            <div class="row">
+              <input-component class="col-md-4" [label]="'Họ và tên'"></input-component>
+              <input-component class="col-md-4" [label]="'Chức vụ'"></input-component>
+              <input-component class="col-md-4" [label]="'Số điện thoại'"></input-component>
+            </div>
+            <div class="row">
+                <input-component class="col-md-12" [label]="'Email'"></input-component>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="mt-4 card ml-2 mr-1">
+        <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+          Khác
+        </h2>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-content>
+            <div class="row">
+              <input-component class="col-md-4" [label]="'Cơ quan chủ quản'"></input-component>
+              <select-component class="col-md-4" [label]="'Dự án tài trợ'"></select-component>
+              <input-component class="col-md-4" [label]="'Thông tin khác'"></input-component>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <!-- <div class="d-flex align-items-center justify-center">
+        <div class="row">
+            <button class="px-3 py-2 text-white rounded mr-2 bg-primary-black flex items-center">
+                <mat-icon svgIcon="mat:add_box" class="mr-2"></mat-icon>
+                Lưu thông tin
+              </button>
+              <button type="button" mat-button class="px-3 ml-2 rounded bg-white-black-07">
+                Hủy
+              </button>
+        </div>
+    </div> -->
+  </form>
+  

@@ -1,0 +1,81 @@
+<globits-grid
+  [container]="true"
+  className="justify-between items-end"
+  mat-dialog-title
+>
+  <h2 class="headline m-0 flex-auto">
+    {{ !f.id.value ? "Tạo mới" : "Sửa" }}
+  </h2>
+  <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+    <mat-icon svgIcon="mat:close"></mat-icon>
+  </button>
+</globits-grid>
+<mat-divider class="-mx-6 text-border"></mat-divider>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <mat-dialog-content class="flex flex-col">
+    <globits-grid [container]="true">
+      <globits-grid [md]="6">
+        <globits-input
+          label="Tên phác đồ"
+          [control]="f.name"
+          [controlName]="'name'"
+          requiredText="Tên phác đồ không được để trống!"
+        >
+        </globits-input>
+      </globits-grid>
+
+      <globits-grid [md]="6">
+        <globits-input
+          label="Mã phác đồ"
+          [control]="f.code"
+          [controlName]="'code'"
+          requiredText="Mã phác đồ không được để trống!"
+        >
+        </globits-input>
+      </globits-grid>
+
+      <globits-grid [md]="6">
+        <globits-select
+          label="Loại phác đồ"
+          [control]="f.indexNumber"
+          [controlName]="'line'"
+          [options]="listRegimenType"
+          requiredText="Loại phác đồ không được để trống!"
+        >
+        </globits-select>
+      </globits-grid>
+
+      <globits-grid [md]="6">
+        <globits-input
+          label="Thứ tự"
+          [control]="f.indexNumber"
+          [controlName]="'indexNumber'"
+          type="number"
+        >
+        </globits-input>
+      </globits-grid>
+
+      <globits-grid [md]="6">
+        <mat-checkbox formControlName="children">Phác đồ trẻ em</mat-checkbox>
+      </globits-grid>
+
+      <globits-grid [md]="6">
+        <mat-checkbox formControlName="elder">Phác đồ người lớn</mat-checkbox>
+      </globits-grid>
+
+      <globits-grid [md]="12">
+        <globits-input
+          label="Ghi chú"
+          [control]="f.description"
+          [controlName]="'description'"
+          [textArea]="true"
+        >
+        </globits-input>
+      </globits-grid>
+    </globits-grid>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Hủy</button>
+    <button color="primary" mat-flat-button type="submit">Lưu</button>
+  </mat-dialog-actions>
+</form>

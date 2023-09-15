@@ -1,0 +1,55 @@
+@import "../../var";
+
+.vex-style-light {
+  $sidenav-background: white;
+
+  --navigation-background: var(--background-foreground);
+  --sidenav-background: #{$sidenav-background};
+
+  // Sidenav
+  --toolbar-background: var(--background-foreground);
+  --sidenav-color: var(--text-color);
+
+  // Sidenav Item
+  --sidenav-item-background-hover: #{darken($sidenav-background, 5)};
+  --sidenav-item-background-active: #{darken($sidenav-background, 3)};
+  --sidenav-item-color: var(--text-color);
+  --sidenav-item-color-hover: var(--text-color);
+  --sidenav-item-color-active: var(--text-color);
+  --sidenav-item-dropdown-background: #{darken($sidenav-background, 3)};
+  --sidenav-item-dropdown-background-hover: #{darken($sidenav-background, 8)};
+  --sidenav-item-dropdown-color-hover: var(--text-color);
+  --sidenav-item-dropdown-background-active: #{darken($sidenav-background, 10)};
+  --sidenav-item-dropdown-color-active: var(--text-color);
+  --sidenav-item-icon-color-active: rgb(var(--color-primary));
+  --sidenav-toolbar-background: #{$sidenav-background};
+  --sidenav-toolbar-background-rgb: #{red($sidenav-background)}, #{green($sidenav-background)}, #{blue($sidenav-background)};
+  --sidenav-section-divider-color: #{map-get($vex-theme-foreground, divider)};
+
+  .sidenav {
+    @apply border-r border-r-gray-200;
+
+    .vex-sidenav-user {
+      .vex-sidenav-user__subtitle,
+      .vex-sidenav-user__dropdown-icon {
+        @apply text-contrast-black/50;
+      }
+
+      &:hover {
+        @apply bg-gray-100 text-gray-900;
+      }
+    }
+
+    .vex-sidenav-search {
+      @apply bg-gray-100 text-gray-600;
+
+      &:hover {
+        @apply bg-gray-200 text-gray-900;
+      }
+    }
+  }
+
+  .vex-sidenav-user--open {
+    @apply bg-gray-100;
+  }
+}

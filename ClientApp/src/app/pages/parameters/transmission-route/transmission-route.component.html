@@ -1,0 +1,72 @@
+<div class="items-center shadow-lg bg-white flex flex-auto justify-center mb-5 rounded">
+  <form [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+    <globits-grid [container]="true">
+      <globits-grid [xs]="12" [md]="12" [lg]="12">
+        <globits-input class="flex-auto" [label]="'Tìm kiếm'" [control]="f.keyword"
+          [controlName]="'keyword'"></globits-input>
+      </globits-grid>
+      <globits-grid [xs]="12" [md]="12" [lg]="12">
+        <button class="bg-cyan-700 text-white" mat-raised-button type="submit">
+          <mat-icon class="icon-sm text-secondary" svgIcon="mat:search"></mat-icon>Tìm kiếm
+        </button>
+      </globits-grid>
+    </globits-grid>
+  </form>
+</div>
+<div class="bg-white px-6 rounded shadow-lg">
+  <div class="bg-white h-16 border-b sticky left-0 flex items-center border-bottom">
+    <h2 class="title my-0 ltr:pr-4 rtl:pl-4 ltr:mr-4 rtl:ml-4 ltr:border-r rtl:border-l hidden sm:block flex-none">
+      <span><mat-icon svgIcon="mat:info"></mat-icon> Đường lấy nhiễm</span>
+    </h2>
+
+    <span class="flex-1"></span>
+    <button [matMenuTriggerFor]="columnFilterMenu" class="ml-4 flex-none" mat-icon-button matTooltip="Filter Columns"
+      type="button">
+      <mat-icon svgIcon="mat:filter_list"></mat-icon>
+    </button>
+    <button (click)="create()" class="ml-4 flex-none bg-cyan-700" mat-mini-fab matTooltip="Thêm mới" type="button">
+      <mat-icon svgIcon="mat:add"></mat-icon>
+    </button>
+  </div>
+  <div class="py-5">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <ngx-datatable class="material" [rows]="rows" [columnMode]="ColumnMode.force" [headerHeight]="50"
+      [footerHeight]="50" rowHeight="auto" [externalPaging]="true" [count]="totalElements"
+      [offset]="searchObject.pageIndex - 1" [limit]="searchObject.pageSize" (page)="setPage($event)">
+      <ngx-datatable-column *ngFor="let col of visibleColumns" [name]="col.name" [prop]="col.prop">
+      </ngx-datatable-column>
+      <ngx-datatable-column [width]="30" name="" [sortable]="false" prop="actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+          <button (click)="update(row)" mat-icon-button type="button">
+            <mat-icon svgIcon="mat:edit"></mat-icon>
+          </button>
+
+          <button (click)="handleDelete(row.id)" mat-icon-button type="button">
+            <mat-icon svgIcon="mat:delete"></mat-icon>
+          </button>
+
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-footer>
+        <ng-template ngx-datatable-footer-template>
+          <globits-datatable-pager (limitChange)="onLimitChange($event)" [page]="searchObject.pageIndex"
+            [size]="searchObject.pageSize" [count]="totalElements" [hidden]="false"
+            (change)="table.onFooterPage($event)">
+          </globits-datatable-pager>
+        </ng-template>
+      </ngx-datatable-footer>
+    </ngx-datatable>
+
+  </div>
+</div>
+<mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
+  <ng-container *ngFor="let column of columns">
+    <button (click)="toggleColumnVisibility(column, $event)" *ngIf="column.prop != 'actions'"
+      class="checkbox-item mat-menu-item">
+      <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="column.visible" color="primary">
+        {{ column.name }}
+      </mat-checkbox>
+    </button>
+  </ng-container>
+</mat-menu>

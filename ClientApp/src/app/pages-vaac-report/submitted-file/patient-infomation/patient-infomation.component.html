@@ -1,0 +1,268 @@
+<vex-secondary-toolbar>
+  <globits-breadcrumbs [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+<div class="col-md-12 col-xl-12 col-lg-12">
+  <div class="mt-4 card ml-2">
+    <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+      Thông tin bệnh nhân
+    </h2>
+    <div class="pb-4 fullwidth border-b-2">
+      <form [formGroup]="form" class="p-gutter fullwidth">
+
+        <div class="d-flex align-items-center justify-content-end">
+
+          <button class="button" style="background-color: #197782; color: #fff; width: 16%;" (click)="backClicked()"
+            mat-raised-button>
+            <icon-back></icon-back>
+            <span class="ml-1">Quay lại</span>
+          </button>
+        </div>
+        <div class="row p-3">
+          <div class="col-12 row select-header">
+            <div class="col-2 d-flex justify-content-center align-items-center" style="bottom: 5px;">
+              <button color="primary" mat-icon-button type="button" (click)="previousTab()">
+                <mat-icon style="color: #fff; zoom: 1.5;">fast_rewind</mat-icon>
+              </button>
+            </div>
+            <mtx-select [(ngModel)]="defaultValue" class="col-8 select-body" [items]="listType"
+              formControlName="sectedReport" bindLabel="name" [clearable]="false">
+            </mtx-select>
+            <div class="col-2 d-flex justify-content-center align-items-center" style="bottom: 5px;">
+              <button color="primary" mat-icon-button type="button" (click)="nextTab()">
+                <mat-icon style="color: #fff; zoom: 1.5;">fast_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="this.form?.get('sectedReport')?.value?.value == 1">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th class="text-center">Trường giá trị</th>
+                  <th class="text-center">Thông tin bệnh nhân</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mã bệnh nhân</td>
+                  <td>{{patient?.ma_BN}}</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Họ tên</td>
+                  <td>{{patient?.ho_TEN}}</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Số căn cước công dân</td>
+                  <td>{{patient?.so_CCCD}}</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Ngày sinh</td>
+                  <td>{{patient?.ngay_SINH | date:'dd/MM/YYYY'}}</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Giới tính</td>
+                  <td>{{patient?.gioi_TINH == 1 ? 'Nam' : patient?.gioi_TINH == 2 ? 'Nữ' : 'Không xác định' }}</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Mã thẻ bảo hiểm y tế</td>
+                  <td>{{patient?.ma_THE_BHYT}}</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Mã DKBD</td>
+                  <td>{{patient?.ma_DKBD}}</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>GT thẻ từ</td>
+                  <td>{{patient?.gt_THE_TU | date : "dd/MM/YYYY"}}</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>GT thẻ đến</td>
+                  <td>{{patient?.gt_THE_DEN | date : "dd/MM/YYYY"}}</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Mã đối tượng khám chữa bệnh</td>
+                  <td>{{patient?.ma_DOITUONG_KCB}}</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Ngày vào</td>
+                  <td>{{patient?.ngay_VAO | date : "dd/MM/YYYY"}}</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Mã loại khám chữa bệnh</td>
+                  <td>{{patient?.ma_LOAI_KCB}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.form?.get('sectedReport')?.value?.value == 2">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th class="text-center">Mã thuốc</th>
+                  <th class="text-center">Phương pháp chế biến</th>
+                  <th class="text-center">Mã CSKCB thuốc</th>
+                  <th class="text-center">Mã nhóm</th>
+                  <th class="text-center">Tên thuốc</th>
+                  <th class="text-center">Đơn vị tính</th>
+                  <th class="text-center">Hàm lượng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <ng-container *ngFor="let item of clinicalPatient"> -->
+                <tr>
+                  <td>{{detailedDrugCriteria?.ma_THUOC}}</td>
+                  <td>{{detailedDrugCriteria?.ma_PP_CHEBIEN}}</td>
+                  <td>{{detailedDrugCriteria?.ma_CSKCB_THUOC}}</td>
+                  <td>{{detailedDrugCriteria?.ma_NHOM}}</td>
+                  <td>{{detailedDrugCriteria?.ten_THUOC}}</td>
+                  <td>{{detailedDrugCriteria?.don_VI_TINH}}</td>
+                  <td>{{detailedDrugCriteria?.ham_LUONG}}</td>
+                </tr>
+                <!-- </ng-container> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.form?.get('sectedReport')?.value?.value == 3">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th class="text-center">Mã dịch vụ</th>
+                  <th class="text-center">Mã PT-TT</th>
+                  <th class="text-center">Mã vật tư</th>
+                  <th class="text-center">Mã nhóm</th>
+                  <th class="text-center">Gói VTYT</th>
+                  <th class="text-center">Tên vật tư</th>
+                  <th class="text-center">Tên dịch vụ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>{{clinicalServices?.stt}}</td>
+                  <td>{{clinicalServices?.ma_DICH_VU}}</td>
+                  <td>{{clinicalServices?.ma_PTTT}}</td>
+                  <td>{{clinicalServices?.ma_VAT_TU}}</td>
+                  <td>{{clinicalServices?.ma_NHOM}}</td>
+                  <td>{{clinicalServices?.goi_VTYT}}</td>
+                  <td>{{clinicalServices?.ten_VAT_TU}}</td>
+                  <td>{{clinicalServices?.ten_DICH_VU}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.form?.get('sectedReport')?.value?.value == 4">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th class="text-center">Mã dịch vụ</th>
+                  <th class="text-center">Mã chỉ số</th>
+                  <th class="text-center">Tên chỉ số</th>
+                  <th class="text-center">Giá trị</th>
+                  <th class="text-center">Đơn vị đo</th>
+                  <th class="text-center">Mô tả</th>
+                  <th class="text-center">Kết luận</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{detailedInformationParaclinical?.stt}}</td>
+                  <td>{{detailedInformationParaclinical?.ma_DICH_VU}}</td>
+                  <td>{{detailedInformationParaclinical?.ma_CHI_SO}}</td>
+                  <td>{{detailedInformationParaclinical?.ten_CHI_SO}}</td>
+                  <td>{{detailedInformationParaclinical?.gia_TRI}}</td>
+                  <td>{{detailedInformationParaclinical?.don_VI_DO}}</td>
+                  <td>{{detailedInformationParaclinical?.ket_LUAN}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.form?.get('sectedReport')?.value?.value == 5">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th class="text-center">Diễn biến lâm sàng</th>
+                  <th class="text-center">Giai đoạn bệnh</th>
+                  <th class="text-center">Hội chẩn</th>
+                  <th class="text-center">Phẫu thuật</th>
+                  <th class="text-center">Thời điểm diễn biến lâm sàng</th>
+                  <th class="text-center">Người thực hiện</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{detailedClinicalCourse?.stt}}</td>
+                  <td>{{detailedClinicalCourse?.dien_BIEN_LS}}</td>
+                  <td>{{detailedClinicalCourse?.giai_DOAN_BENH}}</td>
+                  <td>{{detailedClinicalCourse?.hoi_CHAN}}</td>
+                  <td>{{detailedClinicalCourse?.phau_THUAT}}</td>
+                  <td>{{detailedClinicalCourse?.thoi_DIEM_DBLS | date :"dd/MM/YYYY"}}</td>
+                  <td>{{detailedClinicalCourse?.nguoi_THUC_HIEN}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+          <div *ngIf="this.form?.get('sectedReport')?.value?.value == 6">
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="text-center">Mã liên kết</th>
+                    <th class="text-center">Mã thẻ BHYT</th>
+                    <th class="text-center">Số CCCD</th>
+                    <th class="text-center">Ngày khẳng định HIV</th>
+                    <th class="text-center">Bắt đầu điều trị ARV</th>
+                    <th class="text-center">Mã phác đồ điều trị</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{medicalRecord?.ma_LK}}</td>
+                    <td>{{medicalRecord?.ma_THE_BHYT  }}</td>
+                    <td>{{medicalRecord?.so_CCCD}}</td>
+                    <td>{{medicalRecord?.ngaykd_HIV | date :"dd/MM/YYYY"}}</td>
+                    <td>{{medicalRecord?.bddt_ARV }}</td>
+                    <td>{{medicalRecord?.ma_BAC_PHAC_DO_BD}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </form>
+    </div>
+
+  </div>
+</div>

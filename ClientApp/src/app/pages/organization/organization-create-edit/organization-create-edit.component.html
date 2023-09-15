@@ -1,0 +1,43 @@
+<vex-secondary-toolbar [current]="isCreateMode ? 'Thêm mới' : 'Sửa'">
+  <vex-breadcrumbs [crumbs]="['Cơ sở trực thuộc', isCreateMode ? 'Thêm mới' : 'Sửa']"
+    class="flex-auto"></vex-breadcrumbs>
+
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+<div class="p-gutter fullwidth" mode="card">
+  <mat-tab-group>
+    <mat-tab label="Xem dạng cha/con">
+      <form (ngSubmit)="onSubmit()" [formGroup]="form" class="px-6 py-4 flex flex-col">
+        <div class="card flex-auto">
+          <div class="px-6 py-4 border-b flex items-center bg-info rounded-t">
+            <h2 class="title m-0 text-white">Thông tin cơ bản</h2>
+          </div>
+          <div class="px-6 py-4 flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <globits-input class="flex-auto" [label]="'Mã cơ sở'" [control]="f.code" [controlName]="'code'"
+                requiredText="'Mã cơ sở không được để trống'"></globits-input>
+              <globits-input class="flex-auto" [label]="'Tên cơ sở'" [control]="f.name" [controlName]="'name'"
+                requiredText="'Tên cơ sở không được để trống'"></globits-input>
+              <globits-select class="flex-auto" [label]="'Cơ sở quản lý'" [control]="f.parentId"
+                [controlName]="'parentId'" [objectValue]="false" [options]="listParent"></globits-select>
+              <globits-select class="flex-auto" [label]="'Phân loại'" [control]="f.level" [controlName]="'level'"
+                [options]="listLevel"></globits-select>
+            </div>
+          </div>
+          <div class="pb-3 flex-auto flex items-center justify-center gap-2 navbar-fixed-bottom footer">
+            <div class="font-medium ltr:ml-4 rtl:mr-4 hidden sm:block">
+              <button type="button" routerLink="/unit/child" mat-button>Hủy</button>
+              <button color="primary" mat-raised-button type="submit">Lưu</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </mat-tab>
+    <mat-tab label="Xem dạng cây">
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

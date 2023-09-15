@@ -1,0 +1,38 @@
+
+<globits-breadcrumbs [current]="'Dịch vụ'" [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+
+<div class="py-3 px-2 fullwidth border-b-2 card m-3">
+  <div>
+    <mat-tab-group #tabGroup class="custom-tab-group">
+      <mat-tab label="Dịch vụ" mat-align-tabs="center">
+        <ng-template matTabLabel>Dịch vụ</ng-template>
+        <ng-template matTabContent>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dịch vụ</th>
+                  <th>Hành động</th>
+                  <th style="width: 170px;">Chức năng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="btn btn-group btn-group-xs">
+                      <button class="btn text-white bg-primary-black flex items-center" type="button" matTooltip="Sửa" routerLink="/setting/role/service/update">
+                        <mat-icon svgIcon="mat:edit"></mat-icon> Định nghĩa
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

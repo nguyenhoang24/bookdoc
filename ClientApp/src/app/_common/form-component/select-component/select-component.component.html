@@ -1,0 +1,36 @@
+<mat-form-field [style.width.%]="100" [appearance]="appearance" [id]="controlName" class="select-component">
+  <label *ngIf="label !== null && label !== ''">
+    {{ label }}
+    <span class="text-danger">{{required ? '*' : ''}}</span>
+  </label>
+
+  <div class="input-container">
+    <mtx-select *ngIf="objectValue" [items]="options" [bindLabel]="bindLabel" [formControlName]="controlName"
+      [closeOnSelect]="!multiple" [notFoundText]="notFoundText" (ngModelChange)="handleChange($event)"
+      [multiple]="multiple" appendTo="body" [compareWith]="compareFn">
+    </mtx-select>
+
+    <mtx-select *ngIf="!objectValue" [items]="options" [bindLabel]="bindLabel" [bindValue]="bindValue"
+      [closeOnSelect]="!multiple" [formControlName]="controlName" [notFoundText]="notFoundText"
+      (ngModelChange)="handleChange($event)" appendTo="body" [multiple]="multiple">
+    </mtx-select>
+  </div>
+
+  <span matPrefix>
+    <ng-content select="[prefix]"></ng-content>
+  </span>
+
+  <ng-content></ng-content>
+  <span matSuffix>
+    <ng-content select="[suffix]"></ng-content>
+  </span>
+
+  <mat-error *ngIf="control?.errors && control?.touched && getErrorMessage()">
+    {{ getErrorMessage() }}
+  </mat-error>
+
+  <mat-error *ngIf="control?.hasError('required')">
+    {{requiredText}}
+  </mat-error>
+  <mat-hint>{{hint}}</mat-hint>
+</mat-form-field>

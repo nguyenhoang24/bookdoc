@@ -1,0 +1,126 @@
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+.ngx-datatable .datatable-footer .datatable-pager {
+  flex: 1 1 50% !important;
+}
+
+.datatable-footer .tool-item {
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  text-align: left;
+}
+
+.datatable-icon-right:before {
+  font-family: 'icofont';
+  font-style: normal;
+}
+
+.datatable-icon-skip:before {
+  font-family: 'icofont';
+  font-style: normal;
+}
+
+.datatable-icon-left:before {
+  font-family: 'icofont';
+  font-style: normal;
+}
+
+.datatable-icon-down:before {
+  font-style: normal;
+}
+
+.datatable-icon-prev:before {
+  font-family: 'icofont';
+  font-style: normal;
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+  // background: #006778;
+  color: #fff;
+  border: 1px solid #DBDBDB;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell:nth-of-type(odd) {
+  background: #006778;
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell:nth-of-type(even) {
+  background: #338593;
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell:first-child {
+  padding: 13px;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell:first-child {
+  padding: 13px;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+  border: 1px solid #DBDBDB;
+  padding: 8px;
+  text-align: center;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row.active .datatable-body-cell {
+  background-color: #E1EFF1 !important;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell:nth-of-type(odd) {
+  background-color: #FFFFFF;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell:nth-of-type(even) {
+  background-color: #F4F4F4;
+}
+
+.ngx-datatable.material .datatable-footer .datatable-pager li a {
+  position: relative;
+  float: left;
+  margin-left: -1px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  background: #fafafa;
+  color: #666;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.clickIcon {
+  padding: 0 !important;
+}
+
+.ngx-datatable.material .datatable-footer .datatable-pager li.active a {
+  color: #fff;
+  cursor: default;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.ngx-datatable.material .datatable-footer .datatable-pager li:first-child a {
+  margin-left: 0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.ngx-datatable.material .datatable-footer .datatable-pager li:last-child a {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+a.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

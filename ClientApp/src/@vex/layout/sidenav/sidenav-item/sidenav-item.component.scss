@@ -1,0 +1,174 @@
+.vex-sidenav-item {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  align-items: center;
+  box-sizing: border-box;
+  color: #fff !important;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  min-height: var(--sidenav-item-min-height);
+  padding: var(--sidenav-item-padding-vertical) var(--sidenav-item-padding-horizontal);
+  padding: var(--sidenav-item-padding-vertical) var(--sidenav-item-padding-horizontal);
+  position: relative;
+  text-decoration: none;
+  transition: var(--trans-ease-out);
+  user-select: none;
+  //font-weight: var(--sidenav-item-font-weight);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-shadow: inset 0 -1px 0 0 #47737a;
+  line-height: 16px;
+  padding: 0.925rem;
+  font-size: 14px !important;
+
+  &.vex-sidenav-item--active {
+    //background: var(--sidenav-item-background-active);
+    background-color: #006778;
+    font-weight: bold;
+    transition: font-weight 0.0001s ease;
+
+    .vex-sidenav-item__icon {
+      color: var(--sidenav-item-icon-color-active);
+    }
+
+
+    .vex-sidenav-item__label {
+      color: var(--sidenav-item-color-active);
+    }
+
+    .vex-sidenav-item__dropdown-icon {
+      color: var(--sidenav-item-color-active);
+    }
+  }
+
+  &:hover {
+    //background: var(--sidenav-item-background-hover);
+    font-weight: bold;
+    transition: font-weight 0.0001s ease;
+    //background-color: #007b8f;
+
+    .vex-sidenav-item__icon {
+      color: var(--sidenav-item-color-active);
+    }
+
+    .vex-sidenav-item__label {
+      color: var(--sidenav-item-color-hover);
+    }
+
+    .vex-sidenav-item__dropdown-icon {
+      color: var(--sidenav-item-color-hover);
+    }
+  }
+
+  &.vex-sidenav-item--open {
+    .vex-sidenav-item__dropdown-icon {
+      transform: rotate(90deg) !important;
+    }
+  }
+}
+
+@for $i from 1 through 6 {
+  :host(.item-level-#{$i}) .vex-sidenav-item {
+    //background: var(--sidenav-item-dropdown-background);
+    background-color: #338593;
+    padding: 10px;
+    padding-inline-start: calc(var(--sidenav-item-icon-size) + var(--sidenav-item-icon-gap) + var(--sidenav-item-padding-horizontal) + (var(--sidenav-item-dropdown-gap) * #{$i - 1}));
+    box-shadow: inset 4px 0px 0px #F7BA61;
+    line-height: 16px;
+    font-size: 12px !important;
+
+    &.vex-sidenav-item--active {
+      //background: var(--sidenav-item-dropdown-background-active);
+      background-color: #007b8f;
+      font-weight: bold;
+      transition: font-weight 0.0001s ease;
+
+      .vex-sidenav-item__label {
+        color: var(--sidenav-item-dropdown-color-active);
+      }
+    }
+
+    &:hover {
+      //background: var(--sidenav-item-dropdown-background-hover);
+      background-color: #007b8f;
+      font-weight: bold;
+      transition: font-weight 0.0001s ease;
+
+      .vex-sidenav-item__label {
+        color: var(--sidenav-item-dropdown-color-hover);
+      }
+    }
+  }
+}
+
+.vex-sidenav-item__icon,
+.vex-sidenav-item__label,
+.vex-sidenav-item__dropdown-icon {
+  transition: inherit;
+}
+
+.vex-sidenav-item__icon {
+  flex: none;
+  color: var(--sidenav-item-icon-color);
+  font-size: var(--sidenav-item-icon-size);
+  height: var(--sidenav-item-icon-size);
+  margin-inline-end: var(--sidenav-item-icon-gap);
+  width: var(--sidenav-item-icon-size);
+}
+
+.vex-sidenav-item__label {
+  flex: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vex-sidenav-item__badge {
+  flex: none;
+  border-radius: 9999px;
+  //font-size: 18px;
+  line-height: 16px;
+  margin-inline-start: var(--padding-8);
+  padding: 0 7px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+
+.vex-sidenav-item__dropdown-icon {
+  color: var(--sidenav-item-icon-colo r);
+  //font-size: 18px;
+  font-size: 14px !important;
+  height: 18px;
+  line-height: 16px;
+  margin-inline-start: var(--padding-8);
+  transform: rotate(0deg) !important;
+  width: 18px;
+}
+
+.vex-sidenav-item__dropdown {
+  overflow: hidden;
+}
+
+.vex-sidenav-subheading {
+  box-sizing: border-box;
+  color: var(--sidenav-subheading-color);
+  font: var(--font-caption);
+  margin-top: var(--padding);
+  padding: var(--padding-12) var(--padding);
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-weight: 600;
+  user-select: none;
+}
+
+/** If first item is subheading, remove margin */
+:host(:first-child) .vex-sidenav-subheading {
+  margin-top: calc(var(--padding-12) * -1);
+}
+
+.style-collapsed:has(.vex-sidenav-item--active) {
+  box-shadow: inset 4px 0px 0px #F7BA61;
+  background-color: #338593;
+}

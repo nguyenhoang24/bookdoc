@@ -1,0 +1,59 @@
+<vex-secondary-toolbar>
+  <globits-breadcrumbs [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+
+<vex-page-layout>
+  <vex-page-layout-content>
+    <div>
+      <div class="card">
+        <h2 class="col-12 title px-3 py-3 rounded-t bg-primary-black text-white">
+          <span>Phân quyền tài khoản</span>
+        </h2>
+
+      </div>
+      <div class="row ml-1 mr-1">
+        <button style="margin-top: 20px;margin-bottom: 20px;" (click)="handleOpenPopup()"
+          class="position-search btn text-white bg-primary-black flex items-center justify-content-center">
+          <mat-icon>add_circle_outline</mat-icon>
+          Chọn cơ sở y tế
+        </button>
+
+        <button style="margin-top: 20px;margin-bottom: 20px; margin-left:10px" (click)="handleOpenPopup()"
+          class="position-search btn text-white bg-primary-black flex items-center justify-content-center">
+          <mat-icon>keyboard_backspace</mat-icon>
+          Quay lại
+        </button>
+        <span class="vertical-seperator">
+
+        </span>
+        <div class="user-information">
+          Người dùng: {{this.user?.displayName}}
+        </div>
+      </div>
+      <mat-progress-bar class="mt-4" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      <table-component [rows]="rows" [childTemplate]="button" (limitChange)="onLimitChange($event)"
+      [columns]="columns" [totalElements]="totalElements" (change)="setPage($event)">
+    </table-component>
+
+<mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
+  <ng-container *ngFor="let column of columns">
+    <button (click)="toggleColumnVisibility(column, $event)" *ngIf="column.prop != 'actions'"
+      class="checkbox-item mat-menu-item">
+      <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="column.visible" color="primary">
+        {{ column.name }}
+      </mat-checkbox>
+    </button>
+  </ng-container>
+</mat-menu>
+
+
+<ng-template #button let-row>
+  <button (click)="handleDelete(row?.id)">
+    <icon-trash></icon-trash>
+  </button>
+
+</ng-template>

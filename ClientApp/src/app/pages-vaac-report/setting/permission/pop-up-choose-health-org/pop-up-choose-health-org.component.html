@@ -1,0 +1,68 @@
+<div mat-dialog-title class="flex items-center justify-between">
+  <div>{{title}}</div>
+  <button type="button" mat-icon-button (click)="close('No answer')" tabindex="-1">
+    <mat-icon svgIcon="mat:close"></mat-icon>
+  </button>
+</div>
+<mat-dialog-content>
+  <!-- <globits-grid [container]="true" [className]="'mt-4 bg-blue rounded'">
+        <globits-grid [xs]="12" [md]="12" [lg]="12">
+            <select-component [multiple]="true" [requiredText] = "'Tổ chức y tế không được để trống'" [options]="listHealthOrg" bindLabel="name"
+            class="flex-auto" [label]="'Tổ chức y tế'" [control]="f.userHealthOrgs" [controlName]="'userHealthOrgs'"
+            [required]="true" [objectValue]="true"></select-component>
+        </globits-grid>
+    </globits-grid> -->
+    <div class="row">
+      <div class="col-md-9">
+        <form (ngSubmit)="reloadTable()" [formGroup]="form!">
+          <div class="pb-4 p-gutter fullwidth border-b-2">
+              <globits-grid [container]="true" [className]="'card-form-body'">
+                <globits-grid [xs]="12" [md]="3" [lg]="3">
+                  <select-component [options]="listProvince" [controlName]="'provinceId'" [bindLabel]="'name'"
+                    [bindValue]="'id'" [control]="f?.provinceId" (onChange)="getProvinceAdminUnit()" class="flex-auto"
+                    [label]="'Tỉnh/Thành phố'"></select-component>
+                </globits-grid>
+                <globits-grid [xs]="12" [md]="3" [lg]="3">
+                  <select-component [options]="listDistrict" [controlName]="'districtId'" [bindLabel]="'name'"
+                    [bindValue]="'id'" [control]="f?.districtId" class="flex-auto" [label]="'Quận/Huyện'"></select-component>
+                </globits-grid>
+                <globits-grid [xs]="12" [md]="3" [lg]="6">
+                  <input-component [controlName]="'text'" [control]="f?.text" [label]="'Từ khoá'" [placeholder]="'Nhập từ khoá cần tìm kiếm'">
+                  </input-component>
+                </globits-grid>
+              </globits-grid>
+              <div class="flex items-center justify-center">
+                <button-component type="button" (click)="reloadTable()">
+                  <icon-search></icon-search>
+                  Tìm kiếm
+                </button-component>
+              </div>
+            </div>
+        </form>
+        <table-component [rows]="listOfOrg" (limitChange)="onLimitChange($event)"
+        [selectionType]="selectionType.multi" [selected]="selected"  [columns]="columns" [selection]="true"
+        (select)="onSelect($event)" [selectRow]="true"
+          [totalElements]="totalElements" (change)="setPage($event)">
+        </table-component>
+      </div>
+      <div class="col-md-3" style="border:1px solid black">
+        <h2>Cơ sở đã chọn</h2>
+        <ng-container *ngIf="selected != null && selected.length > 0" >
+          <div class="row" *ngFor="let item of selected">
+            <div>
+              <a matTooltip="Bỏ chọn" (click)="removeOrg(item)">
+                <mat-icon>delete</mat-icon>
+              </a>
+            </div>
+            <div style="margin-left: 10px"> {{item?.shortName}} </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" class="deny-btn btn-view-list" (click)="onNoClick()">{{cancelButtonText}}</button>
+  <button type="button" (click)="onSubmit()" class="custom-button btn-view-list">{{confirmButtonText}}</button>
+</mat-dialog-actions>

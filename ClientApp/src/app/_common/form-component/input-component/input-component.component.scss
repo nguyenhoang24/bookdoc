@@ -1,0 +1,59 @@
+.text-danger {
+    color: red !important;
+}
+
+.input-component {
+    margin: 0;
+
+    label {
+        font-size: 13.5px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .input-container {
+        border: 1px solid #D4D4D4;
+        padding: 10px;
+        border-radius: 5px;
+        height: 40px;
+
+        &:has(input:focus) {
+            border-color: #0099FF;
+        }
+
+        &~::ng-deep span {
+            display: none;
+        }
+    }
+
+    &.ng-valid.ng-touched {
+        label {
+            color: #00a65a;
+        }
+
+        .input-container {
+            border-color: #00a65a;
+        }
+    }
+
+    ::ng-deep {
+        .mat-form-field-outline {
+            display: none;
+        }
+
+        .mat-form-field-wrapper {
+            margin: 0;
+        }
+
+        .mat-form-field-flex {
+            padding: 0;
+        }
+
+        .mat-form-field-infix {
+            width: 100%;
+            padding: 0;
+            height: auto;
+            border: none;
+        }
+    }
+}

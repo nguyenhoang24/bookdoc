@@ -1,0 +1,79 @@
+<div class="w-full h-full overflow-hidden flex flex-col">
+  <div class="bg-app-bar p-4 border-b flex-none flex items-center gap-4">
+    <button (click)="openDrawer()" class="block md:hidden" color="primary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:menu"></mat-icon>
+    </button>
+
+    <div class="relative">
+      <img [src]="chat?.imageSrc" class="avatar flex-none">
+      <mat-icon *ngIf="chat?.status === 'Online'"
+                class="bg-foreground absolute -bottom-1 -right-1 rounded-full text-green icon-xs"
+                svgIcon="mat:check_circle"></mat-icon>
+    </div>
+
+    <div class="flex-auto">
+      <div class="subheading-1">{{ chat?.from }}</div>
+      <div [class.text-green]="chat?.status === 'Online'"
+           class="caption leading-none text-secondary">{{ chat?.status }}</div>
+    </div>
+
+    <button [matMenuTriggerFor]="chatMenu"
+            mat-icon-button
+            class="icon-2xl"
+            type="button">
+      <mat-icon class="text-secondary" svgIcon="mat:more_vert"></mat-icon>
+    </button>
+  </div>
+
+  <vex-scrollbar [@stagger]="messages.length" class="p-4 flex-auto">
+    <ng-container *ngFor="let message of messages; trackBy: trackById">
+      <ng-container *ngIf="message.from === 'me'">
+        <div @fadeInUp class="max-w-3/4 me flex justify-end">
+          <div class="m-1 mr-0 py-2 px-4 shadow rounded-full bg-primary text-primary-contrast">{{ message.message }}</div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="message.from === 'partner'">
+        <div @fadeInUp class="max-w-3/4 partner flex">
+          <div class="m-1 mr-0 py-2 px-4 shadow rounded-full bg-foreground">{{ message.message }}</div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </vex-scrollbar>
+
+  <div class="p-4 bg-app-bar border-t">
+    <form (ngSubmit)="send()" [formGroup]="form">
+      <div class="border rounded-full text-hint overflow-hidden bg-foreground ltr:pl-6 rtl:pr-6 flex-auto flex items-center">
+        <input class="outline-none border-0 h-12 w-240 placeholder:text-secondary body-1 bg-foreground flex-auto"
+               formControlName="message"
+               placeholder="Type a message..."
+               type="text">
+        <button [class.text-primary]="form.get('message').value"
+                [disabled]="!form.get('message').value"
+                class="ltr:mr-4 rtl:ml-4 ltr:ml-3 rtl:mr-3"
+                mat-icon-button
+                type="submit">
+          <mat-icon svgIcon="mat:send"></mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<mat-menu #chatMenu="matMenu" xPosition="after" yPosition="below">
+  <button mat-menu-item>
+    <mat-icon svgIcon="mat:account_circle"></mat-icon>
+    <span>Contact Info</span>
+  </button>
+
+  <button mat-menu-item>
+    <mat-icon svgIcon="mat:volume_mute"></mat-icon>
+    <span>Mute Chat</span>
+  </button>
+
+  <button mat-menu-item>
+    <mat-icon svgIcon="mat:clear_all"></mat-icon>
+    <span>Clear Messages</span>
+  </button>
+</mat-menu>
+

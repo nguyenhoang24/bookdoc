@@ -1,0 +1,414 @@
+@use '@angular/material' as mat;
+@use '@ng-matero/extensions' as mtx;
+$my-primary: mat.define-palette(mat.$cyan-palette);
+$my-accent: mat.define-palette(mat.$pink-palette);
+$my-warn: mat.define-palette(mat.$red-palette);
+$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+        accent: $my-accent,
+        warn: $my-warn,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0,
+    ));
+@include mtx.all-component-themes($my-theme);
+@import "~simplebar/dist/simplebar.css";
+@import "~highlight.js/styles/androidstudio.css";
+@import './app/_common/grid/grid.component.scss';
+@import 'ngx-toastr/toastr';
+@import "ngx-spinner/animations/ball-spin-clockwise-fade.css";
+// Vex Core
+@import "./@vex/styles/core";
+//@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "assets/css/bootstrap.min.css";
+
+:root {
+  --color-primary: #006778;
+
+  .style-success {
+    color: white;
+    background-color: #4CAF50;
+  }
+
+  .style-success .mat-simple-snackbar-action {
+    color: white;
+  }
+
+  .style-error {
+    color: white;
+    background-color: rgba(var(--color-warn), 1);
+  }
+
+  .style-error .mat-simple-snackbar-action {
+    color: white;
+  }
+
+  .style-warning {
+    color: white;
+    background-color: #ff8400;
+  }
+
+  .style-warning .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0;
+  overflow: hidden;
+}
+
+.mat-form-field-required-marker {
+  color: #A94442;
+  // font-size: 22px;
+}
+
+.divider {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  opacity: 0.4;
+  background-color: #ffffff;
+  width: 100%;
+  border-top: 1.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  padding: 2px 10px;
+  line-height: 16px;
+  border-radius: 10px;
+  min-width: 90px;
+  font-size: 13px;
+  display: inline-block;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-danger {
+  background-color: #AE1800 !important;
+}
+
+.badge-warning {
+  background-color: #E28800 !important;
+}
+
+.badge-success {
+  background-color: #24663B !important;
+}
+
+.bg-primary-black {
+  background-color: #006778 !important;
+}
+
+.bg-white-black-07 {
+  background-color: rgba(192, 184, 184, 0.733) !important;
+}
+
+.bg-primary-danger {
+  background-color: red !important;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+.btn-report {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+.text-md {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.btn-view-list {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin: 0 0.5rem;
+  background-color: #f4f4f4 !important;
+  padding: 7px 10px;
+  border-radius: 5px;
+  color: #181c32;
+  opacity: 0.7;
+
+  &:not(:disabled) {
+    opacity: 1;
+
+    &:hover {
+      background-color: #338593 !important;
+      color: #fff;
+    }
+  }
+
+  &.btn-delete:not(:disabled):hover {
+    background-color: #f1416c !important;
+    color: #fff;
+  }
+
+  &.btn-delete:disabled {
+    background-color: #d696a6 !important;
+    color: #fff;
+  }
+
+  .mat-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.custom-button {
+  background-color: #006778 !important;
+  opacity: 1;
+  color: #f4f4f4 !important;
+}
+
+.custom-button:disabled {
+  background-color: #6fa0a8 !important;
+}
+
+.card-form {
+  background-color: #FFFFFF;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0px 5px rgba(0, 46, 89, 0.15);
+  letter-spacing: 1px;
+  margin-top: 10px;
+
+  &-header {
+    background-color: #006778;
+    color: #FFFFFF;
+    font-size: 17.5px;
+    padding: 5px 10px;
+  }
+
+  &-body {}
+}
+
+.footer-form {
+  background-color: #FFFFFF;
+  box-shadow: 0 -1px 5px rgba(0, 46, 89, 0.15);
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  padding: 10px 0;
+  z-index: 1;
+  gap: 5px;
+
+  .btn-footer-form {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+
+  .btn-close {
+    background-color: #B0B0B0;
+    color: #FFFFFF;
+  }
+
+  .btn-save {
+    background-color: #006778;
+    color: #FFFFFF;
+  }
+}
+
+.card-address {
+  background-color: #EDF9FF;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 46, 89, 0.15);
+
+  &-header {
+    padding: 10px;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+
+    .btn-address {
+      background-color: #006778;
+      font-size: 14.5px;
+      color: #FFFFFF;
+      border-radius: 10px;
+      padding: 0 20px;
+      margin-left: 10px;
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.btn-view {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin: 0 0.5rem;
+  background-color: #f4f4f4 !important;
+  padding: 7px 10px;
+  border-radius: 5px;
+  color: #f4f4f4;
+  opacity: 0.7;
+
+  &:not(:disabled) {
+    opacity: 1;
+    background-color: #338593 !important;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &.btn-delete:not(:disabled) {
+    background-color: #f1416c !important;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &.btn-reviewing:not(:disabled) {
+    background-color: #FFC700 !important;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .mat-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+}
+
+.btn-check {
+  border: 1px solid #006778 !important;
+  background-color: white !important;
+  color: #006778;
+}
+
+.isMailStyle {
+  background-color: #00a65a !important;
+  color: #fff;
+  padding: 15px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+.lable-form {
+  display: block;
+  font-weight: 700;
+  color: var(--label-color);
+}
+
+//.ng-select .ng-dropdown-panel {
+//  border: 1px solid #ccc;
+//  background-color: #fff;
+//  border-radius: var(--border-radius);
+//  padding: 0.5rem;
+//}
+//
+//.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked{
+//  background-color: rgba(var(--color-primary), 0.2);
+//  color: blue;
+//  border-radius: var(--border-radius);
+//}
+//
+//.ng-select .ng-select-container .ng-value-container {
+//  margin-top: 8px;
+//}
+//.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+//  bottom: 17px;
+//}
+//
+//.ng-select .ng-select-container .ng-value-container .ng-input>input {
+//  padding: 7px 10px !important
+//}
+//
+//.ng-select.ng-select-single .ng-select-container.ng-appearance-outline .ng-clear-wrapper {
+//  bottom: 12px;
+//}
+.mat-dialog-container {
+  height: auto !important;
+}
+
+.mat-form-field-underline {
+  position: initial !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  white-space: normal !important;
+}
+
+.mat-header-cell,
+.mat-sort-header-arrow,
+.mat-sort-header-indicator {
+  color: black;
+  font-weight: bold;
+}
+
+.warning-dialog {
+  z-index: 500 !important;
+}
+
+mat-tree-node {
+  .mat-checkbox {
+    top: 3px;
+    position: relative;
+    right: 10px;
+  }
+
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #338593 !important;
+  }
+}
+
+.ngx-datatable.material .datatable-header {
+  height: auto !important;
+}
+
+.ngx-datatable .datatable-header .datatable-header-cell .datatable-header-cell-template-wrap {
+  white-space: normal !important;
+}
+
+button.btn-dark-green {
+  color: #FFFFFF;
+  background-color: #006778;
+
+  svg {
+    path {
+      fill: #FFFFFF;
+    }
+  }
+}

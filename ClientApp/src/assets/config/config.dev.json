@@ -1,0 +1,7 @@
+{
+    "SERVER_URL": "http://localhost:8088/",
+    "APP_FACILITY_PAGE_ORG_URL" : "https://prodqa-facility-core.globits.net/facility",
+    "KEYCLOAK_URL": "https://sso.globits.net/auth/",
+    "KEYCLOAK_REALM": "HrPlatform",
+    "KEYCLOAK_CLIENT_ID": "OfficeClient"
+}

@@ -1,0 +1,74 @@
+<div class="table-container" (mousedown)="startDragging($event)" #tableContainer>
+    <table cellpadding="0" cellspacing="0">
+        <thead class="table-thead">
+            <ng-container *ngIf="listHeader?.length > 0;else renderHeader">
+                <tr *ngFor="let row of listHeader">
+                    <th  *ngFor="let item of row" [attr.rowspan]="item?.rowSpan || 1"
+                        [attr.colspan]="item?.colSpan || 1" class="{{item?.classItem}}">
+                        {{item?.name}}
+                    </th>
+                </tr>
+            </ng-container>
+            <ng-template #renderHeader>
+                <tr>
+                    <th *ngIf="selection" [attr.width]="50">
+                        <input *ngIf="selectionType === 'multi'" id="itemAll" (change)="onSelectAll()"
+                            [checked]="selected?.length === rows?.length" type="checkbox">
+                    </th>
+                    <ng-container *ngFor="let item of columns">
+                        <th *ngIf="item?.visible" class="table-thead-item" [attr.width]="item?.width"
+                            [title]="item?.name">
+                            {{item?.name || ''}}
+                        </th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+        </thead>
+        <tbody class="table-body">
+            <ng-content></ng-content>
+            <ng-container *ngIf="rows?.length > 0; else noData">
+                <ng-container *ngFor="let row of rows;let index = index">
+                    <tr (click)="selectRow  ? onSelect(row) : null"
+                        [ngStyle]="{'cursor': selectRow ? 'pointer' : 'default' }"
+                        [class]="renderClassRow ? renderClassRow(row) : ''">
+                        <td *ngIf="selection" class="columns-checkbox">
+                            <input id="name{{row?.id || index}}" (cuechange)="onSelect(row)"
+                                [checked]="checkSelected(row)" type="checkbox">
+                        </td>
+                        <ng-container *ngFor="let item of columns || []" class="table-body-item">
+                            <ng-container *ngIf="item?.visible || item?.visible === undefined">
+                                <td *ngIf="!item?.renderHTML;else renderHTML" class="{{item?.classItem}}"
+                                    [ngStyle]="{'text-align': item?.textAlign || 'center' }"
+                                    [attr.align]="item.alignItem || 'center'">
+                                    {{item?.render ? item?.render(row,item?.prop,index) : getIn(row,item?.prop)}}
+                                    <!-- Nếu prop === function thì đưa ra các button này -->
+                                    <div *ngIf="item?.prop === 'function'" style="display: flex; align-items: center; justify-content: center;">
+                                        <ng-container *ngTemplateOutlet="childTemplate;context:{$implicit: row}">
+                                        </ng-container>
+                                    </div>
+                                </td>
+
+                                <ng-template #renderHTML>
+                                    <td class="{{item?.classItem}}" [ngStyle]="{'text-align': item?.textAlign || 'center' }">
+                                        <ng-container *ngTemplateOutlet="item?.renderHTML();context:{$implicit: row}">
+                                        </ng-container>
+                                    </td>
+                                </ng-template>
+                            </ng-container>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+
+            </ng-container>
+
+            <ng-template #noData>
+                <td [attr.colspan]="columns?.length + 1" class="table-body-item text-sm-left">Không có có dữ liệu</td>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="!isHiddenFooter" class="datatable-footer text-end p-1">
+    <globits-datatable-pager (limitChange)="onLimitChange($event)" [page]="pageIndex" [size]="pageSize"
+        [isMax1000]="isMax1000" [count]="totalElements" [hidden]="false" (change)="setPageSize($event)">
+    </globits-datatable-pager>
+</div>

@@ -1,0 +1,119 @@
+<vex-secondary-toolbar>
+  <globits-breadcrumbs [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+<form class="row" [formGroup]="form!" (ngSubmit)="onSubmit()" *ngIf="isShowForm">
+  <div class="col-md-12 col-xl-12 col-lg-12">
+    <div class="mt-4 card ml-2">
+      <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+        Thông tin cơ bản
+      </h2>
+      <mat-card class="mat-elevation-z3">
+        <mat-card-content>
+          <div class="row">
+              <input-component  class="flex-auto col-md-4" [label]="'Cục phòng chống HTV/AIDS'"></input-component>
+
+              <input-component [control]="f?.code" [controlName]="'code'" [requiredText]="'Mã cơ sở không được để trống'"
+              class="flex-auto col-md-4" [label]="'Mã cơ sở'"></input-component>
+
+              <input-component [control]="f?.shortName" [controlName]="'shortName'" [requiredText]="'Tên viết tắt không được để trống'"
+              class="flex-auto col-md-4" [label]="'Tên viết tắt'"></input-component>
+          </div>
+          <div class="row ml-1 mr-1">
+              <input-component [control]="f?.description" [controlName]="'description'"
+              class="col-md-12" [textArea]="true" class="flex-auto"
+               [label]="'Mô tả ngắn'"></input-component>
+          </div>
+          <div class="row">
+            <select-component [options]="listProvince" [controlName]="'provinceAdminunit'"
+                [bindLabel]="'name'" [control]="f?.provinceAdminunit"
+                [objectValue]="true" (onChange)="getProvinceAdminUnit()"
+                class="col-md-4" [label]="'Tỉnh/Thành phố'"></select-component>
+
+            <select-component [options]="listDistrict" [controlName]="'disctrictAdminunit'"
+                [bindLabel]="'name'" [control]="f?.disctrictAdminunit"
+                [objectValue]="true" (onChange)="getDistrictAdminUnit()"
+                class="col-md-4" [label]="'Quận/Huyện'"></select-component>
+
+            <select-component  [options]="listCommune" [controlName]="'communeAdminunit'"
+            [bindLabel]="'name'" [control]="f?.communeAdminunit"
+            [objectValue]="true"
+            class="col-md-4" [label]="'Phường/xã'"></select-component>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="mt-4 card ml-2">
+      <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+        Địa chỉ
+      </h2>
+      <mat-card class="mat-elevation-z3">
+        <mat-card-content>
+          <div class="row">
+            <input-component [controlName]="'streetAddress'" [control]="f?.streetAddress" class="col-md-12" [label]="'Số nhà/Tên đường/Thôn/Xóm'"></input-component>
+          </div>
+          <div class="row">
+            <select-component [options]="listProvince" [controlName]="'provinceLocation'"
+                [bindLabel]="'name'" [control]="f?.provinceLocation"
+                [objectValue]="true" (onChange)="getProvinceLocation()"
+                class="col-md-4" [label]="'Tỉnh/Thành phố'"></select-component>
+
+            <select-component [options]="listDistrictLocation" [controlName]="'disctrictLocation'"
+                [bindLabel]="'name'" [control]="f?.disctrictLocation"
+                [objectValue]="true"  (onChange)="getDistrictLocation()"
+                class="col-md-4" [label]="'Quận/Huyện'"></select-component>
+
+            <select-component  [options]="listCommuneLocation" [controlName]="'communeLocation'"
+            [bindLabel]="'name'" [control]="f?.communeLocation"
+            [objectValue]="true"
+            class="col-md-4" [label]="'Phường/xã'"></select-component>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="col-md-12 col-xl-12 col-lg-12">
+    <div class="mt-4 card ml-2 mr-1">
+      <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+        Liên hệ
+      </h2>
+      <mat-card class="mat-elevation-z3">
+        <mat-card-content>
+          <div class="row">
+            <input-component [control]="f?.fullName" [controlName]="'fullName'" class="col-md-4" [requiredText]="'Họ và tên không được để trống'" [label]="'Họ và tên'"></input-component>
+            <input-component [control]="f?.possition" [controlName]="'possition'" class="col-md-4" [requiredText]="'Chức vụ không được để trống'" [label]="'Chức vụ'"></input-component>
+            <input-component [control]="f?.phoneNumber" [controlName]="'phoneNumber'" class="col-md-4" [requiredText]="'Số điện thoại không được để trống'" [label]="'Số điện thoại'"></input-component>
+          </div>
+          <div class="row">
+              <input-component  [control]="f?.email" [controlName]="'email'" class="col-md-12" [label]="'Email'"></input-component>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="mt-4 card ml-2 mr-1">
+      <h2 class="title px-3 py-4 rounded-t bg-primary-black text-white">
+        Khác
+      </h2>
+      <mat-card class="mat-elevation-z3">
+        <mat-card-content>
+          <div class="row">
+            <select-component [options]="listOrgOther" [control]="f?.parent" [controlName]="'parent'"
+            [bindLabel]="'shortName'" [objectValue]="true"
+            class="col-md-4" [label]="'Cơ quan chủ quản'"></select-component>
+            <input-component [control]="f?.donor" [controlName]="'donor'" class="col-md-4" [label]="'Dự án tài trợ'"></input-component>
+            <input-component [control]="f?.otherInformation" [controlName]="'otherInformation'" class="col-md-4" [label]="'Thông tin khác'"></input-component>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="flex p-2 justify-center footer">
+      <button class="btn text-white bg-primary-danger flex items-center mr-2" type="button" onclick="history.back()">Hủy</button>
+      <button class="btn text-white bg-primary-black flex items-center" *ngIf="isCreateMode" type="submit"><mat-icon svgIcon="mat:add"></mat-icon> Lưu</button>
+      <button class="btn text-white bg-primary-black flex items-center" *ngIf="!isCreateMode" type="submit"><mat-icon svgIcon="mat:add"></mat-icon> Cập nhật</button>
+
+    </div>
+  </div>
+
+</form>

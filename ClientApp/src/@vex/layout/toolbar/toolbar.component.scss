@@ -1,0 +1,37 @@
+:host {
+  background: var(--toolbar-background);
+  box-sizing: border-box;
+  color: var(--toolbar-color);
+  display: block;
+  white-space: nowrap;
+  width: 100%;
+  z-index: var(--toolbar-z-index);
+}
+
+.toolbar {
+  height: var(--toolbar-height);
+}
+
+a {
+  color: var(--toolbar-color);
+  text-decoration: none;
+}
+
+.title {
+  font-size: large;
+}
+
+.vex-sidenav-user__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.icon-personName {
+  position: relative;
+  top: 5px;
+  background-color: #f0f0f0;
+  padding: 1px;
+  border-radius: 3px;
+  margin-right: 8px;
+}

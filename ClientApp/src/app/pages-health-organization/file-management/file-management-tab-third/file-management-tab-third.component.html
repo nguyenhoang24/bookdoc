@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="searchForm" (ngSubmit)="reloadTable()">
+      <div class="row mt-3">
+          <globits-grid [xs]="12" [md]="4" [lg]="4">
+              <input-component [control]="f?.nameOrg" [controlName]="'nameOrg'" class="flex-auto" [label]="'Tên cơ sở'"></input-component>
+          </globits-grid>
+
+      </div>
+      <div class="row">
+          <globits-grid [xs]="12" [md]="12" [lg]="12">
+              <div class="flex items-center justify-center">
+                  <button-component type="submit">
+                    <icon-search></icon-search>
+                    Tìm kiếm
+                  </button-component>
+              </div>
+          </globits-grid>
+      </div>
+      <div class="row mt-4">
+          <globits-grid style="padding: 0;" [xs]="12" [md]="12" [lg]="12">
+             <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+              <table-component [rows]="listOrg" (limitChange)="onLimitChange($event)" [columns]="columns" [totalElements]="totalElements" (change)="setPage($event)">
+              </table-component>
+          </globits-grid>
+      </div>
+
+  </form>
+</div>
+

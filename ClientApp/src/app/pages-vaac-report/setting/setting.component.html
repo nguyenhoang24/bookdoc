@@ -1,0 +1,68 @@
+<vex-secondary-toolbar>
+    <globits-breadcrumbs [crumbs]="breadcrumbs"></globits-breadcrumbs>
+  
+    <button class="ml-2" color="primary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button>
+</vex-secondary-toolbar>
+<form (ngSubmit)="onSubmit()" [formGroup]="form!">
+    <div class="pb-4 p-gutter fullwidth border-b-2">
+      <div class="card pb-4">
+        <h2 class="title px-3 py-4 rounded-t text-white bg-primary-black">Danh sách đơn vị nộp hồ sơ</h2>
+        <!-- <globits-grid [container]="true" [className]="'card-form-body'">
+            <globits-grid [xs]="12" [md]="6" [lg]="6">
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="3" [lg]="3">
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="1" [lg]="1">
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="1" [lg]="1">
+                <button mat-raised-button class = "button" style="background-color: #197782; color: #fff;">
+                    <mat-icon>add</mat-icon>
+                    Thêm mới tỉnh
+                </button>
+            </globits-grid>
+        </globits-grid> -->
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="row col-md-6 col-lg-6 ml-2">
+                    <input-component class="flex-auto" [label]="'Tên địa danh'"></input-component>    
+                </div>
+                <!-- <div class="row col-md-6 col-lg-6 ml-5"> -->
+                    <button mat-raised-button class = "button" style="background-color: #197782; color: #fff;">
+                        <mat-icon>add</mat-icon>
+                        Thêm mới tỉnh
+                    </button>
+                <!-- </div> -->
+        </div>
+    </div>
+   </div> 
+</form>
+
+<div class="pb-4 p-gutter fullwidth border-b-2">
+    <div class="card pb-4">
+        <div class="d-flex align-items-center justify-content-between">
+            <button class="button" mat-button>
+                <icon-print></icon-print>
+                <span class="ml-1">In danh sách đơn vị</span>
+            </button>
+            <button class="button" style="background-color: #197782; color: #fff; width: 16%;" mat-raised-button>
+                <mat-icon>add</mat-icon>
+                <span class="ml-1">Thêm mới</span>
+            </button>
+        </div>
+        <table-component [rows]="listOfFiles" [childTemplate]="button" (limitChange)="onLimitChange($event)" [columns]="columns" [totalElements]="totalElements" (change)="setPage($event)">
+        </table-component>
+    </div>
+</div>
+
+<ng-template #button>
+    <button class="mr-1">
+        <icon-eyes></icon-eyes>
+    </button>
+    <button class="ml-2">
+        <icon-edit></icon-edit>
+    </button>
+    <button>
+        <icon-trash></icon-trash>
+    </button>
+</ng-template>

@@ -1,0 +1,44 @@
+.container-fluid {
+    /* fallback for old browsers */
+    background: #006778;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: #006778;
+    
+    height: 100vh;
+  
+  .check-account {
+    margin: auto;
+    height: fit-content;
+    padding: 2%;
+  }
+
+  a {
+    padding: 5%;
+    width: inherit;
+    font-size: large;
+  }
+  .btn-primary {
+    color: #ffffff;
+    border-color: #E28800 !important;
+    background-color: #E28800 !important;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-tt {
+    background-color: #246eb8 !important;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .parent-cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
+}

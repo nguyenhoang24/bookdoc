@@ -1,0 +1,44 @@
+<mat-form-field [style.width.%]="100" [appearance]="appearance" [id]="controlName" class="input-component">
+    <label>
+        {{label}}
+        <span class="text-danger"> {{required ? '*' : ''}}</span>
+    </label>
+
+    <ng-container *ngIf="textArea == true">
+        <div class="input-container">
+            <textarea matInput type="{{ type }}" [formControlName]="controlName" [placeholder]="placeholder"></textarea>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!textArea">
+        <div class="input-container">
+            <ng-container *ngIf="needCapitalize; then capitalize else noCapitalize;">
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <!-- Handle capitalize -->
+    <ng-template #capitalize>
+        <input [maxlength]="maxLength" matInput type="{{ type }}"  [placeholder]="placeholder" [formControlName]="controlName" capitalizeFirst />
+    </ng-template>
+    <ng-template #noCapitalize>
+        <input [maxlength]="maxLength" matInput type="{{ type }}"  [placeholder]="placeholder" [formControlName]="controlName" />
+    </ng-template>
+    <!-- Handle capitalize -->
+
+    <span matPrefix>
+        <ng-content select="[prefix]"></ng-content>
+    </span>
+    <mat-hint>
+        <span class="MatHint">{{ hint }}</span>
+    </mat-hint>
+    <ng-content></ng-content>
+    <span matSuffix>
+        <ng-content select="[suffix]"></ng-content>
+    </span>
+    <mat-error class="text-error" *ngIf="control?.errors && control?.touched && getErrorMessage()">
+        {{ getErrorMessage() }}
+    </mat-error>
+    <mat-error *ngIf="control?.hasError('required')">
+        {{requiredText}}
+    </mat-error>
+</mat-form-field>

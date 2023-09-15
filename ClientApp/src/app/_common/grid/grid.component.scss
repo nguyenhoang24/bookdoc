@@ -1,0 +1,41 @@
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.grid-item {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.75rem;
+
+    .mat-form-field-wrapper {
+        padding: 0;
+        margin-bottom: 0;
+
+        &>div:last-child {
+            position: unset;
+            padding: 0;
+            font-size: 85%;
+        }
+    }
+}
+
+@mixin class-grid($name, $width) {
+    @media (min-width:$width) {
+        @for $i from 0 through 12 {
+            .grid-#{$name}-#{$i} {
+                flex-grow: 0;
+                max-width: calc(100% / 12 * #{$i});
+                flex-basis:calc(100% / 12 * #{$i});
+            }
+        }
+    }
+}
+
+@include class-grid(xs, 0px);
+@include class-grid(sm, 600px);
+@include class-grid(md, 960px);
+@include class-grid(lg, 1280px);
+@include class-grid(xl, 1920px);

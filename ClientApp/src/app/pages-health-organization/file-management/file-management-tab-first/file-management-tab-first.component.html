@@ -1,0 +1,39 @@
+<div class="container">
+    <form [formGroup]="form!">
+        <div class="row">
+            <globits-grid [xs]="12" [md]="4" [lg]="4">
+                <input-component class="flex-auto" [label]="''"></input-component>
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="4" [lg]="4">
+                <input-component class="flex-auto" [label]="''"></input-component>
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="4" [lg]="4">
+                <input-component class="flex-auto" [label]="''"></input-component>
+            </globits-grid>
+        </div>
+        <div class="row">
+            <globits-grid [xs]="12" [md]="12" [lg]="12">
+                <div class="text-center">
+                    <b>Chỉ hỗ trợ tệp tin XML</b>
+                </div>
+            </globits-grid>
+        </div>
+        <div class="row">
+            <globits-grid [xs]="12" [md]="12" [lg]="12">                
+                <div class="d-flex align-items-center justify-content-center">
+                    <button class="button" (click)="triggerSelectFile(fileInput)" mat-raised-button>
+                        <mat-icon class="mr-1"><icon-add-file></icon-add-file></mat-icon>
+                        {{fileName ? fileName : 'Chọn tệp tin'}}
+                    </button>
+                    <input #fileInput type="file" (change)="readFile($event)" accept="text/xml" style="display: none;">
+                    <button class="button" mat-raised-button type="button" (click)="nextTab()">
+                        <mat-icon class="mr-1">
+                            <icon-upload-file></icon-upload-file>
+                        </mat-icon>
+                        Tải lên
+                    </button>
+                </div>
+            </globits-grid>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,88 @@
+<vex-secondary-toolbar >
+  <vex-breadcrumbs [crumbs]="['Đơn vị hành chính']" class="flex-auto"></vex-breadcrumbs>
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+<vex-page-layout>
+  <vex-page-layout-content [class.px-gutter]="'fullwidth'" >
+
+    <div class="card overflow-auto">
+      <div class="bg-app-bar px-6 h-16 border-b sticky left-0 flex items-center">
+        <h2 class="title my-0 ltr:pr-4 rtl:pl-4 ltr:mr-4 rtl:ml-4 ltr:border-r rtl:border-l hidden sm:block flex-none">
+          <span>{{titlePage}}</span>
+        </h2>
+
+        <form [formGroup]="searchForm" (ngSubmit)="submitSearch()"
+          class="bg-foreground rounded-full border px-4 max-w-[300px] flex-auto flex items-center border border-gray-300">
+          <mat-icon class="icon-sm text-secondary" svgIcon="mat:search"></mat-icon>
+          <input formControlName="keyword" id="keyword" name="keyword"
+            class="px-4 py-2 border-0 outline-none w-full bg-transparent" placeholder="Tìm kiếm..." type="text">
+        </form>
+        <span class="flex-1"></span>
+        <button [matMenuTriggerFor]="columnFilterMenu" class="ml-4 flex-none" mat-icon-button matTooltip="Filter Columns"
+          type="button">
+          <mat-icon svgIcon="mat:filter_list"></mat-icon>
+        </button>
+        <button (click)="importExel.click()" mat-raised-button class="position-search btn text-white bg-primary-black" color="primary" type="button">
+          <mat-icon svgIcon="mat:backup" style="margin-right: 5px"></mat-icon>
+          Nhập Excel
+        </button>
+        <input id="importExel" #importExel type='file' (change)="onSelectFile($event)">
+        <button (click)="handleCreate()" class="ml-4 position-search btn text-white bg-primary-black flex-none" color="primary" mat-mini-fab type="button"
+          style="width: auto; border-radius: 6px; padding: 0 5px;">
+          <mat-icon svgIcon="mat:add"></mat-icon> <span>{{level == 0 ? "Thêm tỉnh thành": (level == 1 ? "Thêm quận
+            huyện": "Thêm phường xã")}}</span>
+        </button>
+      </div>
+      <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      <ngx-datatable class="material" [rows]="rows" [columnMode]="ColumnMode.force" [headerHeight]="50"
+        [footerHeight]="50" rowHeight="auto" [externalPaging]="true" [count]="totalElements"
+        [offset]="searchObject.pageIndex - 1" [limit]="searchObject.pageSize" (page)="setPage($event)">
+        <!-- <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+          [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+        </ngx-datatable-column> -->
+        <ngx-datatable-column *ngFor="let col of visibleColumns" [name]="col.name" [prop]="col.prop">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Thao tác" [sortable]="false" prop="actions">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+            <button (click)="handleGetChildren(row)" mat-icon-button type="button" matTooltip="Chi tiết"
+              *ngIf="level == 1 || level == 0">
+              <mat-icon svgIcon="mat:dehaze"></mat-icon>
+            </button>
+            <button (click)="handleEdit(row.id)" class="icon-edit" mat-icon-button type="button" matTooltip="Chỉnh sửa">
+              <mat-icon svgIcon="mat:edit"></mat-icon>
+            </button>
+            <button (click)="handleDelete(row.id)" class="icon-delete" mat-icon-button type="button" matTooltip="Xóa">
+              <mat-icon svgIcon="mat:delete"></mat-icon>
+            </button>
+
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-footer>
+          <ng-template ngx-datatable-footer-template>
+            <globits-datatable-pager (limitChange)="onLimitChange($event)" [page]="searchObject.pageIndex"
+              [size]="searchObject.pageSize" [count]="totalElements" [hidden]="false"
+              (change)="table.onFooterPage($event)">
+            </globits-datatable-pager>
+          </ng-template>
+        </ngx-datatable-footer>
+      </ngx-datatable>
+
+    </div>
+
+  </vex-page-layout-content>
+
+</vex-page-layout>
+<mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
+  <ng-container *ngFor="let column of columns">
+    <button (click)="toggleColumnVisibility(column, $event)" *ngIf="column.prop != 'actions'"
+      class="checkbox-item mat-menu-item">
+      <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="column.visible" color="primary">
+        {{ column.name }}
+      </mat-checkbox>
+    </button>
+  </ng-container>
+</mat-menu>

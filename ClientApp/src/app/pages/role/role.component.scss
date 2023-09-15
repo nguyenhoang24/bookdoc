@@ -1,0 +1,92 @@
+// :host ::ng-deep .mat-icon {
+//   position: relative;
+//   top: 5px;
+// }
+.table-container {
+  width: 100%;
+  max-width: 100%;
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+
+    .columns-checkbox:has(input:checked) {
+
+      &,
+      &~td {
+        background-color: #E1EFF1 !important;
+      }
+    }
+  }
+
+  table tr:first-child td {
+    text-align: center;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #DBDBDB;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #006778;
+    color: white;
+
+    p {
+      width: 20px;
+    }
+
+  }
+
+  th:nth-child(even) {
+    background-color: #338593;
+  }
+
+  td:nth-child(even) {
+    background-color: #F4F4F4;
+  }
+
+  .td-no-data {
+    font-size: 15px;
+    text-align: center;
+    color: #FF0000;
+    font-weight: bold;
+  }
+}
+
+.table-container thead {
+  position: sticky;
+  top: 0;
+}
+
+.bg-primary-white {
+  background-color: #F4F4F4;
+  color: #333;
+}
+
+.bg-primary-pink {
+  background-color: #f1416c !important;
+}
+
+// .custom-tab-group .mat-tab-header {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// .custom-tab-group .mat-tab-label {
+//   flex-grow: 1;
+//   text-align: center;
+// }
+
+:host ::ng-deep .mat-tab-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

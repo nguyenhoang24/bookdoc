@@ -1,0 +1,35 @@
+<div class="vex-user-menu">
+  <a (click)="clickProfile()" *ngIf="this.menu == 2" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--color-primary), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:account_circle"></mat-icon>
+    <div class="vex-user-menu-item__label">Thông tin cá nhân</div>
+  </a>
+  <a *ngIf="isTT05" (click)="downloadFileDocument()" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--color-primary), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm">description</mat-icon>
+    <div class="vex-user-menu-item__label">Tài liệu hướng dẫn sử dụng</div>
+  </a>
+  <a *ngIf="isTT05" (click)="downloadFileSlide()" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--color-primary), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm">description</mat-icon>
+    <div class="vex-user-menu-item__label">Slide hướng dẫn sử dụng</div>
+  </a>
+  <a (click)="logout()" *ngIf="this.menu == 2" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--color-primary), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:logout"></mat-icon>
+    <div class="vex-user-menu-item__label">Đăng xuất</div>
+  </a>
+
+  <a *ngIf="this.menu == 1" class="vex-user-menu-item" matRipple matRippleColor="rgb(var(--color-primary), 0.1)">
+    <!-- <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:account_circle"></mat-icon> -->
+    <div class="vex-user-menu-item__label">Hỗ trợ 24/07 gọi 02438465731</div>
+  </a>
+  <a *ngIf="this.menu == 1" class="vex-user-menu-item" matRipple matRippleColor="rgb(var(--color-primary), 0.1)">
+    <!-- <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:account_circle"></mat-icon> -->
+    <div class="vex-user-menu-item__label">HDSD cài đặt Teamviewer</div>
+  </a>
+  <a *ngIf="this.menu == 1" class="vex-user-menu-item" matRipple matRippleColor="rgb(var(--color-primary), 0.1)">
+    <!-- <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:account_circle"></mat-icon> -->
+    <div class="vex-user-menu-item__label">HDSD cài đặt Ultraviewer</div>
+  </a>
+</div>

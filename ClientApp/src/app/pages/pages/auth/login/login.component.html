@@ -1,0 +1,32 @@
+<div class="container-fluid py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-10 col-lg-10 col-xl-10">
+          <div class="card bg-white" style="border-radius: 1rem;">
+              <form class="p-5 text-center" [formGroup] = "form!" (ngSubmit)="login()">
+                  <div class="card-body text-center">
+                    <div class="text-center" style="margin-top: 10vh;">
+                      <h1 class="title m-0" style="color: black;">ĐĂNG NHẬP</h1>
+                    </div>
+                    <div style="display: flex; align-items: center; flex-direction: column;">
+                      <label class="label mt-3" style="color: black;">Tên đăng nhập:</label>
+                      <input type="text" class="user-input" formControlName="username">
+                      <label class="label mt-3" style="color: black;">Mật khẩu:</label>
+                      <input type="password" class="user-input" formControlName="password">
+                    </div>
+                    <!-- <div style="display: flex; align-items: center; flex-direction: column;">
+                    </div> -->
+                      <p class="sub-title mt-4">Liên hệ SĐT <span style="font-size: 16px; color: red;">0938034022</span> để lấy mật khẩu nếu bạn quên mật khẩu</p>
+
+                      <button mat-raised-button color="primary" class="btn btn-outline-light btn-lg px-5 mt-4" type="submit">Đăng nhập</button>
+                      <div class="mt-5 display: flex; align-items: center; justify-content-center">
+                        <div class="alert alert-warning" role="alert" *ngIf="form.invalid && submitted">
+                          {{f.username.hasError('required') ? 'Bạn chưa nhập tên người dùng hoặc email' : f.password.hasError('required')
+                          ? 'Bạn chưa nhập mật khẩu' : ''}}
+                        </div>
+                      </div> 
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<vex-secondary-toolbar [current]="isCreateMode ? 'Tạo mới' : 'Cập nhật'">
+    <vex-breadcrumbs [crumbs]="['Đơn vị hành chính', isCreateMode ? 'Tạo mới' : 'Cập nhật']"
+        class="flex-auto"></vex-breadcrumbs>
+
+    <button class="ml-2" color="primary" mat-icon-button type="button">
+        <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button>
+</vex-secondary-toolbar>
+<div class="p-gutter fullwidth">
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="card flex-auto">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" class="px-6 py-4 flex flex-col">
+                <mat-form-field appearance="outline" class="flex-auto">
+                    <mat-label>Mã</mat-label>
+                    <input formControlName="code" matInput>
+                    <mat-error *ngIf="submitted && f.code.hasError('required')">Mã không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="flex-auto">
+                    <mat-label>Tên</mat-label>
+                    <input formControlName="name" matInput>
+                    <mat-error *ngIf="submitted && f.name.hasError('required')">Tên không được để trống</mat-error>
+                </mat-form-field>
+
+                <!-- <mat-form-field appearance="outline">
+                        <mat-label>Cấp</mat-label>
+                        <input formControlName="level" matInput>
+                    </mat-form-field> -->
+
+                <div class="flex items-center justify-end gap-2">
+                    <button class="button px-2 py-1 text-white rounded mr-2 bg-primary-black flex items-center" mat-raised-button [ngStyle]="{'backgroundColor': '#006778', 'color': 'white'}">Lưu</button>
+                    <button  onclick="history.back()" class="button-cancel px-2 py-1 rounded bg-white-black-07 flex items-center" mat-raised-button mat-dialog-close type="button" ><mat-icon class="mr-2">cancel</mat-icon>Hủy</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>

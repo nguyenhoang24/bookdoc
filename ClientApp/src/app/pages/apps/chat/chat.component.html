@@ -1,0 +1,76 @@
+<div class="w-full h-full p-gutter container flex flex-col">
+
+  <div class="bg-primary/10 border-b w-full h-64 absolute top-0 left-0 right-0"></div>
+
+  <mat-drawer-container class="card overflow-hidden flex-auto">
+    <mat-drawer [mode]="mobileQuery.matches ? 'over' : 'side'"
+                (openedChange)="drawerChange($event)"
+                [opened]="drawerOpen$ | async"
+                class="drawer"
+                position="start">
+      <div class="h-full flex flex-col">
+        <div class="p-4 border-b bg-app-bar flex-none flex items-center gap-4">
+          <div [matMenuTriggerFor]="statusMenu" class="relative cursor-pointer">
+            <img class="avatar bg-foreground flex-none" src="assets/img/avatars/default.jpg">
+            <mat-icon [ngClass]="activeStatus.colorClass"
+                      [svgIcon]="activeStatus.icon"
+                      class="bg-foreground absolute -bottom-1 -right-1 rounded-full icon-xs"></mat-icon>
+          </div>
+
+          <div class="border rounded-full text-hint overflow-hidden bg-foreground flex-auto flex items-center">
+            <mat-icon class="ml-4 mr-3 flex-none icon-sm" svgIcon="mat:search"></mat-icon>
+            <input class="outline-none border-0 h-10 w-full placeholder:text-secondary caption bg-foreground flex-auto"
+                   placeholder="Search or start a new chat"
+                   type="text">
+          </div>
+        </div>
+
+        <div class="headline font-normal m-0 p-4 text-primary border-b flex-none flex items-center">
+          <mat-icon class="mr-5 ml-1" svgIcon="mat:chat"></mat-icon>
+          <div class="block font-semibold">Chats</div>
+        </div>
+
+        <vex-scrollbar *ngIf="chats$ | async as chats" [@stagger]="chats.length" class="flex-auto">
+          <a *ngFor="let chat of chats; trackBy: trackById"
+             @fadeInUp
+             [routerLink]="[chat.id]"
+             class="border-b px-4 py-6 hover:bg-hover cursor-pointer relative select-none block no-underline text-dark"
+             matRipple
+             routerLinkActive="bg-hover">
+            <div class="flex items-center gap-4">
+              <div class="relative flex-none">
+                <img [src]="chat.imageSrc" class="avatar"/>
+                <mat-icon *ngIf="chat.status === 'Online'"
+                          class="bg-foreground absolute -bottom-1 -right-1 rounded-full text-green icon-xs"
+                          svgIcon="mat:check_circle"></mat-icon>
+              </div>
+              <div class="overflow-hidden flex-auto">
+                <div [class.font-medium]="chat.unreadCount > 0" class="subheading-2 leading-snug">{{ chat.from }}</div>
+                <div [class.font-medium]="chat.unreadCount > 0"
+                     class="body-1 text-secondary truncate">{{ chat.message }}</div>
+              </div>
+              <div class="flex-none flex flex-col items-end justify-center">
+                <div class="caption font-medium text-secondary">{{ chat.timestamp }}</div>
+                <div *ngIf="chat.unreadCount > 0"
+                     class="w-5 h-5 bg-primary text-primary-contrast rounded-full caption font-semibold text-center mt-1">
+                  {{ chat.unreadCount }}
+                </div>
+              </div>
+            </div>
+          </a>
+        </vex-scrollbar>
+      </div>
+    </mat-drawer>
+
+    <mat-drawer-content class="chat-pattern relative">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+
+<mat-menu #statusMenu="matMenu" xPosition="after" yPosition="below">
+  <button (click)="setStatus(status)" *ngFor="let status of statuses; trackBy: trackById" mat-menu-item>
+    <mat-icon [ngClass]="status.colorClass" [svgIcon]="status.icon" class="icon-xs"></mat-icon>
+    <span>{{ status.label }}</span>
+  </button>
+</mat-menu>

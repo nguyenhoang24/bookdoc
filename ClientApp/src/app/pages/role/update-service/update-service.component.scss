@@ -1,0 +1,33 @@
+.has-success {
+  box-shadow: none;
+  border: 1px solid #00a65a;
+  padding: 6px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.bg-primary-black :hover {
+  background-color: #5014DB;
+  color: #fff;
+}
+
+.parentTick {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.chilren {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+.footer {
+  position: fixed !important;
+  bottom: 0;
+  width: 100%;
+  background: var(--footer-background);
+  color: var(--footer-color);
+  height: var(--footer-height);
+  position: relative !important;
+  z-index: var(--footer-z-index);
+}

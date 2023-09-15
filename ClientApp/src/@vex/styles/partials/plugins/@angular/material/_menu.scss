@@ -1,0 +1,37 @@
+:root {
+  .mat-menu-panel {
+    @apply rounded shadow;
+  }
+
+  .mat-menu-content {
+    @apply p-2;
+  }
+
+  .mat-menu-item {
+    @apply flex items-center rounded text-sm font-medium h-10 pl-2 pr-6 transition duration-100 ease-out;
+
+    &:hover:not([disabled]) {
+      @apply bg-primary/10;
+
+      .mat-icon {
+        @apply text-primary;
+      }
+    }
+
+    .mat-icon {
+      @apply transition duration-100 ease-out;
+      font-size: 1.25rem;
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+  }
+
+  .mat-menu-item-submenu-trigger {
+    @apply pr-12;
+  }
+}
+
+.mat-menu-item .mat-icon-no-color,
+.mat-menu-submenu-icon {
+  color: currentColor;
+}

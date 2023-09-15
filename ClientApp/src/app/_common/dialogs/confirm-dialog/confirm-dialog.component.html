@@ -1,0 +1,16 @@
+<div mat-dialog-title class="flex items-center justify-between">
+  <div>{{title}}</div>
+  <button type="button" mat-icon-button (click)="close('No answer')" tabindex="-1">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+<p [innerHTML]="text"></p>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button class="btn-view-list custom-button" (click)="onYesClick()">{{confirmButtonText}}</button>
+  <button mat-raised-button class="btn-view-list" (click)="onNoClick()">{{cancelButtonText}}</button>
+</mat-dialog-actions>

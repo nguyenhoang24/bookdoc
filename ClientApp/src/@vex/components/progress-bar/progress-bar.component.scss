@@ -1,0 +1,20 @@
+$transition-duration: 500ms;
+$transition-delay: 200ms;
+$transition-timing-function: var(--trans-ease-out-timing-function);
+
+.progress-bar {
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  z-index: 99999;
+  transition: opacity $transition-duration $transition-timing-function $transition-delay, visibility 0ms $transition-timing-function ($transition-duration + $transition-delay);
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity $transition-duration $transition-timing-function, visibility 0ms $transition-timing-function 0ms;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="w-full h-full flex flex-col">
+  <div class="px-gutter pt-6 pb-20 flex-none">
+    <globits-grid [container]="true">
+      <globits-grid [xs]="12" [md]="6" [lg]="3">
+        <div class="px-gutter sm:px-0 parameters-menu">
+          <ng-container>
+            <ul>
+              <li>
+                <span class="h-10 px-4 font-medium flex items-center">Tham số</span>
+              </li>
+              <li *ngFor="let item of items">
+                <a [routerLink]="[item.route]"
+                  class="border h-10 px-4 cursor-pointer hover:bg-primary/10 font-medium flex items-center transition duration-200 ease-out"
+                  matRipple>{{item.label}}</a>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </globits-grid>
+      <globits-grid [xs]="12" [md]="6" [lg]="9">
+        <main class="content">
+          <router-outlet></router-outlet>
+        </main>
+      </globits-grid>
+    </globits-grid>
+
+  </div>
+</div>

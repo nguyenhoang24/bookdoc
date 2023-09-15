@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="flex items-center" mat-dialog-title>
+    <h2 class="headline m-0 flex-auto">{{!f.id.value ? 'Thêm Mới' : 'Chỉnh Sửa'}}</h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+  <mat-dialog-content class="flex flex-col">
+    <div class="flex flex-col sm:flex-row">
+        <input-component [control]="f?.code" [controlName]="'code'" [requiredText]="'Mã thuốc không được để trống'"
+        class="flex-auto col-md-6" [label]="'Mã thuốc'"></input-component>
+
+        <input-component [control]="f?.name" [controlName]="'name'" [requiredText]="'Tên thuốc không được để trống'"
+        class="flex-auto col-md-6" [label]="'Tên thuốc'"></input-component>
+    </div>
+    <div class="flex flex-col sm:flex-row">
+      <input-component [control]="f?.activeIngredient" [controlName]="'activeIngredient'" [requiredText]="'Thành phần thuốc không được để trống'"
+      class="flex-auto col-md-12" [label]="'Thành phần'"></input-component>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+
+    <button mat-button mat-dialog-close type="button">Hủy</button>
+    <button color="primary" mat-flat-button type="submit">Lưu</button>
+    <!-- <button mat-button mat-dialog-close type="button">Đóng</button>
+    <button color="primary" mat-flat-button type="submit">Lưu</button> -->
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,96 @@
+<div [class.container]="isVerticalLayout$ | async" class="toolbar w-full px-gutter flex items-center">
+  <button (click)="openSidenav()" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:menu"></mat-icon>
+  </button>
+  <div *ngIf="!isTT05" class="title"><b>{{ currentUser?.healthOrganization?.shortName || currentUser?.healthOrganization?.name}}</b></div>
+  <a *ngIf="isVerticalLayout$ | async" [routerLink]="['/']" class="ltr:mr-4 rtl:ml-4 block flex items-center">
+    <img alt="Logo" class="w-8 select-none" src="assets/img/demo/logo.svg" />
+    <h1 [class.hidden]="!mobileQuery" class="title ltr:pl-4 rtl:pr-4 m-0 select-none">VEX</h1>
+  </a>
+  <a *ngIf="linkOldVersion" target="_blank" href="{{linkOldVersion}}" style="color: red">
+    <h2>Hệ thống báo cáo cũ C03</h2>
+  </a>
+  <!-- <div *ngIf="isTT05" class="title"><b>HỆ THỐNG BÁO CÁO THÔNG TƯ 05</b></div> -->
+  <!-- <button *ngIf="!isHiddenButtonVAAC && currentUser?.vaacReport" class="mat-focus-indicator bg-cyan-700 text-white mat-button-base"
+    routerLink="/tt05" mat-raised-button>
+    VAAC Report
+  </button>
+  <button *ngIf="isHiddenButtonVAAC && currentUser?.hivInfo" routerLink="/dashboards/community-test"  class="mat-focus-indicator bg-cyan-700 text-white mat-button-base" mat-raised-button>
+    HIV INFO 4.1
+  </button> -->
+
+  <div *ngIf="(isVerticalLayout$ | async) && isNavbarInToolbar$ | async" [class.hidden]="mobileQuery"
+    class="px-gutter flex-none flex items-center">
+    <vex-navigation-item *ngFor="let item of navigationItems" [item]="item"></vex-navigation-item>
+  </div>
+
+  <span class="flex-1"></span>
+
+  <div class="-mx-1 flex items-center">
+    <div class="px-1">
+      <div class="vex-sidenav-user__container flex-none">
+        <div #userProfileMenuOriginRef (click)="openProfileMenu(userProfileMenuOriginRef,1)"
+          [class.vex-sidenav-user--open]="userMenuOpen$ | async" class="vex-sidenav-user flex items-center" matRipple
+          matRippleColor="var(--sidenav-item-ripple-color)">
+          <div class="vex-sidenav-user__content flex-auto">
+            <!-- <mat-icon svgIcon="mat:help_icon"></mat-icon> -->
+            <div class="vex-sidenav-user__title"><mat-icon style="position: relative; top: 5px;">help_outline</mat-icon> Thông tin trợ giúp</div>
+          </div>
+          <mat-icon class="vex-sidenav-user__dropdown-icon flex-none" style="position: relative; top: 5px;" svgIcon="mat:arrow_drop_down"></mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="px-1">
+      <button (click)="openSearch()" mat-icon-button type="button">
+        <mat-icon color="primary" svgIcon="mat:search"></mat-icon>
+      </button>
+    </div> -->
+
+    <div class="px-1">
+      <vex-toolbar-notifications></vex-toolbar-notifications>
+    </div>
+
+    <!-- <div class="px-1">
+      <button (click)="openQuickpanel()" mat-icon-button type="button">
+        <mat-icon color="primary" svgIcon="mat:bookmarks"></mat-icon>
+      </button>
+    </div> -->
+
+    <div class="px-1">
+      <!-- <button [matMenuTriggerFor]="languageMenu" mat-icon-button type="button">
+        <mat-icon svgIcon="flag:united-states"></mat-icon>
+      </button> -->
+      <div class="vex-sidenav-user__container flex-none">
+        <div #helpMenuOriginRef (click)="openProfileMenu(helpMenuOriginRef,2)"
+          [class.vex-sidenav-user--open]="userMenuOpen$ | async" class="vex-sidenav-user flex items-center" matRipple
+          matRippleColor="var(--sidenav-item-ripple-color)">
+          <!-- <img class="vex-sidenav-user__image flex-none" src="assets/img/avatars/1.jpg" /> -->
+          <div class="vex-sidenav-user__content flex-auto">
+            <div class="vex-sidenav-user__title"><mat-icon class="icon-personName">person_outline</mat-icon>{{username}}</div>
+          </div>
+          <mat-icon class="vex-sidenav-user__dropdown-icon flex-none" svgIcon="mat:arrow_drop_down"></mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userVisible$ | async" class="px-1">
+      <vex-toolbar-user></vex-toolbar-user>
+    </div>
+
+    <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
+      <button mat-menu-item>
+        <mat-icon svgIcon="flag:united-states"></mat-icon>
+        <span>English</span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon svgIcon="flag:germany"></mat-icon>
+        <span>German</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+<vex-navigation *ngIf="(isVerticalLayout$ | async) && isNavbarBelowToolbar$ | async"
+  [class.hidden]="mobileQuery"></vex-navigation>

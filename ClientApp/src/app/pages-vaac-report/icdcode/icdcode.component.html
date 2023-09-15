@@ -1,0 +1,84 @@
+<vex-secondary-toolbar>
+  <globits-breadcrumbs [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+
+<vex-page-layout>
+  <vex-page-layout-content>
+    <div [formGroup]="searchForm!" (ngSubmit)="submitSearch()">
+      <div class="card">
+        <h2 class="col-12 title px-3 py-3 rounded-t bg-primary-black text-white">
+          <span>Danh sách mã ICD 10</span>
+        </h2>
+        <div class="row ml-1 mr-1">
+          <globits-grid [container]="true"
+            [className]="'card-form-body d-flex align-items-center justify-content-center'">
+            <globits-grid [xs]="12" [md]="2" [lg]="6">
+              <input-component class="flex-auto" [label]="'Tìm kiếm'" [control]="f.text" [controlName]="'text'">
+              </input-component>
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="2" [lg]="2">
+
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="2" [lg]="2">
+              <button style="width: 100%;" (click)="submitSearch()"
+              class="position-search btn text-white bg-primary-black flex items-center justify-content-center">
+              <mat-icon svgIcon="mat:search"></mat-icon>
+              Tìm kiếm
+            </button>
+            </globits-grid>
+            <globits-grid [xs]="12" [md]="2" [lg]="2">
+              <button style="width: 100%;" (click)="handleOpenPopupFormDrug()" type="button" matTooltip="Tạo mới"
+                class="position-search btn text-white bg-primary-black flex items-center justify-content-center">
+                <mat-icon svgIcon="mat:add"></mat-icon>
+                Tạo mới
+              </button>
+            </globits-grid>
+          </globits-grid>
+        </div>
+      </div>
+      <mat-progress-bar class="mt-4" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        rowHeight="auto" [externalPaging]="true" [count]="totalElements" [offset]="searchObject.pageIndex - 1"
+        [limit]="searchObject.pageSize" (page)="setPage($event)" style="width: 100%;">
+        <ngx-datatable-column *ngFor="let col of visibleColumns" [name]="col.name" [prop]="col.prop">
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Thao tác" [sortable]="false" prop="actions">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button (click)="handleOpenPopupFormDrug(row?.id)" mat-icon-button type="button" matTooltip="Chỉnh sửa">
+              <mat-icon svgIcon="mat:edit" style="color: #FFC804"></mat-icon>
+            </button>
+            <button (click)="handleDelete(row.id)" style="color: #F23F44" mat-icon-button type="button"
+              matTooltip="Xóa">
+              <mat-icon svgIcon="mat:delete"></mat-icon>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-footer>
+          <ng-template ngx-datatable-footer-template>
+            <globits-datatable-pager (limitChange)="onLimitChange($event)" [page]="searchObject.pageIndex"
+              [size]="searchObject.pageSize" [count]="totalElements" [hidden]="false"
+              (change)="table.onFooterPage($event)">
+            </globits-datatable-pager>
+          </ng-template>
+        </ngx-datatable-footer>
+      </ngx-datatable>
+    </div>
+  </vex-page-layout-content>
+</vex-page-layout>
+
+<mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
+  <ng-container *ngFor="let column of columns">
+    <button (click)="toggleColumnVisibility(column, $event)" *ngIf="column.prop != 'actions'"
+      class="checkbox-item mat-menu-item">
+      <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="column.visible" color="primary">
+        {{ column.name }}
+      </mat-checkbox>
+    </button>
+  </ng-container>
+</mat-menu>

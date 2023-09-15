@@ -1,0 +1,43 @@
+<div class="select-component">
+  <label *ngIf="label !== '' || label !== null">{{label}}</label>
+  <div class="select-tree-container">
+    <ng-container [ngTemplateOutlet]="ListItemTree" [ngTemplateOutletContext]="{$implicit: data}">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #ListItemTree let-row>
+  <ng-container *ngFor="let item of row">
+    <ng-container [ngTemplateOutlet]="LabelItemTree" [ngTemplateOutletContext]="{$implicit: getNodes(item)}">
+    </ng-container>
+
+    <ol *ngIf="!row.level && item.children?.length > 0" #ListItemSelect class="select-tree-popper">
+      <ng-container [ngTemplateOutlet]="ListItemTree"
+        [ngTemplateOutletContext]="{$implicit: item.children}"></ng-container>
+    </ol>
+
+    <ol *ngIf="row.level && item.children?.length > 0">
+      <ng-container [ngTemplateOutlet]="ListItemTree"
+        [ngTemplateOutletContext]="{$implicit: item.children}"></ng-container>
+    </ol>
+  </ng-container>
+</ng-template>
+
+<ng-template #LabelItemTree let-item>
+  <div #ItemSelectAll *ngIf="!item?.level" class="select-tree-all"
+    [ngClass]="openPopper ? 'popper-open' : 'popper-close'" (click)="onOpenPopper()">
+    <mat-checkbox [checked]="descendantsAllSelected(item)" [indeterminate]="descendantsPartiallySelected(item)"
+      (change)="todoItemSelectionToggle(item)" [attr.title]="item?.name">Tất cả</mat-checkbox>
+    <icon-arrow-down class="icon-popper"></icon-arrow-down>
+  </div>
+
+  <li *ngIf="item?.level">
+    <mat-checkbox *ngIf="item?.expandable" [checked]="descendantsAllSelected(item)"
+      [indeterminate]="descendantsPartiallySelected(item)" (change)="todoItemSelectionToggle(item)"
+      [attr.title]="item?.name">{{item.name}}</mat-checkbox>
+
+    <mat-checkbox [attr.title]="item?.name" *ngIf="!item?.expandable"
+      [checked]="checklistSelection.isSelected(item)"
+      (change)="todoLeafItemSelectionToggle(item)">{{item.name}}</mat-checkbox>
+  </li>
+</ng-template>

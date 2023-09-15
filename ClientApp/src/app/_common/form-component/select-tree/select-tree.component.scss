@@ -1,0 +1,70 @@
+.select-component {
+    .select-tree-container {
+        position: relative;
+        border: 1px solid #D4D4D4;
+        border-radius: 5px;
+
+
+        ::ng-deep {
+
+            .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+            .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+                background-color: #006778;
+            }
+        }
+
+        .select-tree-all {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px;
+            cursor: pointer;
+
+            .icon-popper {
+                transition: all .3s;
+            }
+
+            ::ng-deep {
+                .mat-checkbox-layout {
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+
+        .popper-open {
+            &~.select-tree-popper {
+                display: block;
+            }
+
+            .icon-popper {
+                transform: rotate(-90deg);
+            }
+        }
+
+        .popper-close {
+            &~.select-tree-popper {
+                display: none;
+            }
+
+            .icon-popper {
+                transform: rotate(0deg);
+            }
+        }
+
+        .select-tree-popper {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            min-width: 100%;
+            width: max-content;
+            max-width: 120%;
+            overflow: hidden;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 1;
+            background-color: #FFFFFF;
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            padding: 5px;
+        }
+    }
+}

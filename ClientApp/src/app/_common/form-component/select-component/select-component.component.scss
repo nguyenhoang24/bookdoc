@@ -1,0 +1,36 @@
+@import "../input-component/input-component.component.scss";
+
+.text-danger {
+    color: red !important;
+}
+
+.select-component {
+    width: 100%;
+    @extend .input-component;
+}
+
+.select-component-multiple {
+    width: 100%;
+    @extend .input-component;
+
+    .input-container {
+        height: max-content;
+
+        ::ng-deep {
+            ng-select {
+                padding: 0.75rem;
+            }
+
+            .ng-value-container {
+                .ng-value {
+                    background-color: #338593;
+                    color: #FFFFFF;
+                    font-size: 13px;
+                    border-radius: 7px;
+                    padding: 3px 0;
+                }
+            }
+        }
+
+    }
+}

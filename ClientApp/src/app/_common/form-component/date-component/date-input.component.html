@@ -1,0 +1,36 @@
+<mat-form-field [style.width.%]="100" [appearance]="appearance" [id]="controlName" class="date-component">
+    <label>
+        {{label}}
+        <span class="text-danger"> {{required ? '*' : ''}}</span>
+    </label>
+
+    <div class="input-container">
+        <input (dateChange)="change($event)" [formControlName]="controlName" [min]="minDate" [max]="maxDate"
+            [matDatepicker]="dp" matInput>
+        <mat-datepicker-toggle [for]="dp" matSuffix></mat-datepicker-toggle>
+    </div>
+    <mat-datepicker #dp></mat-datepicker>
+    <span matPrefix>
+        <ng-content select="[prefix]"></ng-content>
+    </span>
+    <mat-hint *ngIf="hint !== '' && hint !== null">
+        <span class="MatHint">{{ hint }}</span>
+    </mat-hint>
+    <ng-content></ng-content>
+    <span matSuffix>
+        <ng-content select="[suffix]"></ng-content>
+    </span>
+
+    <mat-error
+        *ngIf="control?.errors && control?.touched && getErrorMessage() && !control?.hasError('matDatepickerParse')">
+        {{ getErrorMessage() }}
+    </mat-error>
+
+    <mat-error *ngIf="control?.hasError('required') && !control?.hasError('matDatepickerParse')">
+        {{requiredText}}
+    </mat-error>
+
+    <mat-error *ngIf="control?.hasError('matDatepickerParse')">
+        Nhập ngày chưa đúng định dạng, vui lòng nhập lại!
+    </mat-error>
+</mat-form-field>

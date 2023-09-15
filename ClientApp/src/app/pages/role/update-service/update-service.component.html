@@ -1,0 +1,70 @@
+<globits-breadcrumbs [current]="" [crumbs]="breadcrumbs" class="flex-auto"></globits-breadcrumbs>
+<form class="example-form" [formGroup]="form" *ngIf="loading" (ngSubmit)="onSubmit()" ngNativeValidate>
+
+  <div class="py-3 px-2 fullwidth border-b-2 m-3 row">
+    <div class="col-md-4 col-lg-4">
+      <div class="card p-3" *ngIf="type==1">
+        <strong style="color: #00a65a">Dịch vụ</strong>
+        <input value="Xét nghiệm tại cộng đồng" placeholder="Xét nghiệm tại cộng đồng" class="has-success">
+      </div>
+      <div class="card p-3" *ngIf="type!==1">
+        <strong>Tên quyền</strong>
+        <input value="" placeholder="" class="has-success" formControlName="api">
+
+        <strong class="py-3">Dịch vụ</strong>
+        <mat-slide-toggle>Xét nghiệm tại cộng đồng</mat-slide-toggle>
+        <mat-slide-toggle>Tư vấn & xét nghiệm (Sàng lọc)</mat-slide-toggle>
+        <mat-slide-toggle>Điều trị Methadone</mat-slide-toggle>
+
+        <div class="flex justify-end btn btn-group btn-group-xs border-top mt-3">
+          <button class="btn text-white bg-primary-black flex items-center mr-2" type="button" matTooltip="Lưu thông tin">
+            <mat-icon svgIcon="mat:edit"></mat-icon> Lưu thông tin
+          </button>
+          <button class="btn text-white bg-white-black-07 flex items-center" type="button" matTooltip="Hủy">
+            <mat-icon svgIcon="mat:delete"></mat-icon> Hủy
+          </button>
+        </div>
+
+      </div>
+      <div class="p-3">
+        <span class="text-danger" style="font-size: 18px;">Lưu ý</span>
+        <p> {{type ==1 ? 'Định nghĩa quyền theo dịch vụ, phục vụ việc hạn chế quyền của cở sở theo dịch vụ đăng ký trên hệ thống.' : type==2 ? 'Chức năng tạo quyền. Bạn có thể chọn/bỏ chọn những hành động ở cột bên phải của giao diện' : 'Chức năng cập nhật quyền. Bạn có thể chọn/bỏ chọn những hành động ở cột bên phải của giao diện'}} </p>
+      </div>
+      <div class="flex justify-end">
+        <div class="btn btn-group btn-group-xs">
+          <button class="btn text-white bg-primary-black flex items-center" type="button" matTooltip="Chọn tất cả">
+            <mat-icon svgIcon="mat:check_box"></mat-icon> Chọn tất cả
+          </button>
+          <button class="btn text-white bg-primary-black flex items-center" type="button" matTooltip="Bỏ chọn">
+            <mat-icon svgIcon="mat:check_box_outline_blank"></mat-icon> Bỏ chọn
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-lg-8">
+      <!-- <form class="example-form" [formGroup]="form" *ngIf="loading" (ngSubmit)="onSubmit()" ngNativeValidate> -->
+
+      <div class="card p-3">
+        <div class="parentTick">
+          <mat-slide-toggle [(ngModel)]="apiChecked" (change)="toggleApi()" [ngModelOptions]="{standalone: true}">Api</mat-slide-toggle>
+        </div>
+        <div class="chilren">
+          <mat-slide-toggle [(ngModel)]="aChecked" [ngModelOptions]="{standalone: true}">API lấy đơn vị hành chính theo id cha</mat-slide-toggle>
+          <mat-slide-toggle [(ngModel)]="bChecked" [ngModelOptions]="{standalone: true}">API lấy thông tin tham số ước tính theo id</mat-slide-toggle>
+          <mat-slide-toggle [(ngModel)]="cChecked" [ngModelOptions]="{standalone: true}">/api/field-column</mat-slide-toggle>
+          <mat-slide-toggle [(ngModel)]="dChecked" [ngModelOptions]="{standalone: true}">/api/field-column/check-code</mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="flex p-2 justify-center mt-2 footer">
+  <button class="px-3 py-2 text-white rounded mr-2 bg-primary-black flex items-center">
+    <mat-icon svgIcon="mat:edit" class="mr-2"></mat-icon>
+    Lưu thông tin
+  </button>
+  <button type="button" onclick="history.back()" mat-button class="px-3 ml-2 rounded bg-white-black-07">
+    Hủy
+  </button>
+</div> -->
+</form>
